@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Yasin — Senior SWE & Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+:root {
+  --navy:    #09101f;
+  --navy2:   #0e1929;
+  --navy3:   #152238;
+  --amber:   #e8a045;
+  --amber2:  #f5c878;
+  --amber3:  #c47b1a;
+  --teal:    #2ec4b6;
+  --rose:    #e84855;
+  --cream:   #f0e9da;
+  --cream2:  #d9cfbc;
+  --text:    #cdd5e0;
+  --muted:   #5a6a82;
+  --border:  #1e2f47;
+  --serif:   'Playfair Display', Georgia, serif;
+  --sans:    'Outfit', sans-serif;
+  --mono:    'Fira Code', monospace;
+}
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+#cur-dot {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--amber); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+#cur-ring {
+  position: fixed; width: 40px; height: 40px;
+  border: 1.5px solid rgba(232,160,69,0.5); border-radius: 50%;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.18s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+#particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb { background: var(--amber3); border-radius: 2px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 800;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 5vw;
+  background: rgba(9,16,31,0.82);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(232,160,69,0.1);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 0.8rem 5vw; }
+.nav-brand {
+  font-family: var(--serif); font-size: 1.15rem; font-style: italic;
+  color: var(--amber); text-decoration: none; letter-spacing: 0.02em;
+}
+.nav-links { display: flex; gap: 0.25rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--muted); text-decoration: none; font-size: 0.8rem;
+  font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.45rem 0.9rem; border-radius: 2px;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--amber); background: rgba(232,160,69,0.07); }
+.nav-links a.active { color: var(--amber); }
+.nav-badge {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.4rem 1rem; border: 1px solid rgba(46,196,182,0.35);
+  font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--teal); border-radius: 2px;
+  background: rgba(46,196,182,0.06);
+}
+.nav-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal); animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(46,196,182,0.4)}
+  50%{opacity:0.7;box-shadow:0 0 0 5px rgba(46,196,182,0)}
+}
+.burger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: 4px; }
+.burger span { display: block; width: 22px; height: 2px; background: var(--amber); transition: all 0.3s; }
+
+/* HERO */
+#hero {
+  min-height: 100vh; position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 7rem 5vw 4rem; overflow: hidden;
+}
+.hero-bg-text {
+  position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-size: clamp(8rem, 18vw, 18rem);
+  font-weight: 900; font-style: italic;
+  color: rgba(232,160,69,0.04);
+  line-height: 1; pointer-events: none; user-select: none; white-space: nowrap;
+}
+.hero-inner { max-width: 860px; position: relative; z-index: 2; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--amber);
+  letter-spacing: 0.12em; margin-bottom: 2rem; opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
+}
+.hero-tag::before { content: '//'; color: var(--muted); }
+.hero-tag .sep { color: var(--muted); }
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 7.5rem);
+  font-weight: 900; line-height: 0.95; letter-spacing: -0.02em;
+  color: var(--cream); margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.7s ease 0.35s forwards;
+}
+.hero-name .highlight {
+  color: var(--amber); display: inline-block; position: relative;
+}
+.hero-name .highlight::after {
+  content: ''; position: absolute; left: 0; bottom: 4px; right: 0;
+  height: 3px; background: var(--amber3); opacity: 0.4;
+}
+.hero-duality {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.7s ease 0.5s forwards;
+}
+.duality-pill {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.5rem 1.1rem; border-radius: 100px;
+  font-size: 0.82rem; font-weight: 500;
+}
+.duality-pill.prev {
+  background: rgba(90,106,130,0.15); border: 1px solid rgba(90,106,130,0.2); color: var(--muted);
+}
+.duality-pill.now {
+  background: rgba(232,160,69,0.12); border: 1px solid rgba(232,160,69,0.25); color: var(--amber2);
+}
+.duality-pill .icon { font-size: 0.9rem; }
+.duality-arrow { color: var(--muted); font-size: 1.1rem; }
+.hero-bio {
+  font-size: clamp(1rem, 2vw, 1.15rem); color: var(--muted);
+  line-height: 1.85; max-width: 640px; margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.7s ease 0.65s forwards;
+}
+.hero-bio strong { color: var(--cream); font-weight: 500; }
+.hero-bio em { color: var(--amber2); font-style: normal; }
+.hero-cta {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  opacity: 0; animation: fadeUp 0.7s ease 0.8s forwards;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  padding: 0.9rem 2rem; transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.btn-amber {
+  background: var(--amber); color: var(--navy);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+.btn-amber::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--amber2); transform: translateX(-100%);
+  transition: transform 0.3s ease; z-index: -1;
+}
+.btn-amber:hover::before { transform: translateX(0); }
+.btn-ghost {
+  border: 1px solid var(--border); color: var(--text);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+.btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  z-index: 2; opacity: 0; animation: fadeUp 0.7s ease 1.1s forwards;
+}
+.scroll-text { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+.scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(180deg, var(--amber), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.4;transform:scaleY(0.6)} }
+
+/* SECTIONS */
+.section { padding: 7rem 5vw; position: relative; z-index: 1; }
+.section-alt { background: var(--navy2); }
+.s-label {
+  display: flex; align-items: center; gap: 0.8rem;
+  font-family: var(--mono); font-size: 0.68rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 1rem;
+}
+.s-label::before { content: ''; width: 28px; height: 1px; background: var(--amber); }
+.s-title {
+  font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+  color: var(--cream); margin-bottom: 1rem;
+}
+.s-title em { color: var(--amber); font-style: italic; }
+.s-subtitle { font-size: 0.95rem; color: var(--muted); line-height: 1.7; max-width: 520px; }
+
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; margin-top: 4rem; align-items: start; }
+.about-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.25rem; }
+.about-text p strong { color: var(--cream); font-weight: 600; }
+.about-text p em { color: var(--amber2); font-style: normal; }
+.about-facts { display: flex; flex-direction: column; gap: 1px; }
+.fact-row {
+  display: flex; gap: 1.5rem; padding: 1.1rem 1.5rem;
+  background: var(--navy3); border-left: 2px solid transparent;
+  transition: border-color 0.25s, background 0.25s;
+}
+.fact-row:hover { border-left-color: var(--amber); background: rgba(232,160,69,0.04); }
+.fact-label { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; min-width: 110px; padding-top: 0.15rem; }
+.fact-val { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+.fact-val a { color: var(--amber); text-decoration: none; }
+
+.timeline { margin-top: 3rem; }
+.tl-title { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.tl-item { display: flex; gap: 1.5rem; padding-bottom: 1.5rem; position: relative; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-left { display: flex; flex-direction: column; align-items: center; }
+.tl-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.tl-dot.amber { background: var(--amber); box-shadow: 0 0 10px rgba(232,160,69,0.5); }
+.tl-dot.teal  { background: var(--teal);  box-shadow: 0 0 10px rgba(46,196,182,0.5); }
+.tl-dot.muted { background: var(--muted); }
+.tl-line { width: 1px; flex: 1; background: var(--border); margin-top: 4px; }
+.tl-item:last-child .tl-line { display: none; }
+.tl-year { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); white-space: nowrap; padding-top: 0.1rem; min-width: 70px; }
+.tl-role { font-size: 0.88rem; font-weight: 600; color: var(--cream); margin-bottom: 0.2rem; }
+.tl-place { font-size: 0.78rem; color: var(--amber2); margin-bottom: 0.3rem; }
+.tl-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+/* SKILLS */
+.skills-wrap { margin-top: 4rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.skill-card {
+  background: var(--navy3); border: 1px solid var(--border);
+  padding: 2rem; position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
+}
+.skill-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--amber), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+}
+.skill-card:hover { border-color: rgba(232,160,69,0.3); transform: translateY(-3px); }
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+.skill-card-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.5rem; }
+.skill-card-sub { font-family: var(--mono); font-size: 0.65rem; color: var(--amber3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+.skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.pill { padding: 0.25rem 0.65rem; font-size: 0.68rem; font-family: var(--mono); border-radius: 2px; letter-spacing: 0.04em; }
+.pill-amber { background: rgba(232,160,69,0.1); border: 1px solid rgba(232,160,69,0.18); color: var(--amber2); }
+.pill-teal  { background: rgba(46,196,182,0.1);  border: 1px solid rgba(46,196,182,0.18);  color: var(--teal); }
+.pill-muted { background: rgba(90,106,130,0.1);  border: 1px solid rgba(90,106,130,0.18);  color: var(--muted); }
+
+/* PROJECTS */
+.projects-grid { margin-top: 4rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; background: var(--border); }
+.proj-card {
+  background: var(--navy); padding: 2.5rem;
+  position: relative; overflow: hidden; transition: background 0.3s;
+}
+.proj-card:hover { background: var(--navy3); }
+.proj-card-glow {
+  position: absolute; top: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  opacity: 0; transition: opacity 0.4s; pointer-events: none;
+}
+.proj-card:hover .proj-card-glow { opacity: 1; }
+.glow-amber { background: radial-gradient(circle, rgba(232,160,69,0.12), transparent 70%); }
+.glow-teal  { background: radial-gradient(circle, rgba(46,196,182,0.12), transparent 70%); }
+.proj-type { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.proj-num { font-family: var(--serif); font-size: 3rem; font-weight: 900; color: rgba(232,160,69,0.07); position: absolute; top: 1.5rem; right: 2rem; line-height: 1; }
+.proj-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--cream); margin-bottom: 0.75rem; line-height: 1.2; }
+.proj-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+.proj-footer { display: flex; align-items: center; justify-content: space-between; }
+.proj-status { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; }
+.status-live { background: rgba(46,196,182,0.1); color: var(--teal); border: 1px solid rgba(46,196,182,0.2); }
+.status-research { background: rgba(232,160,69,0.1); color: var(--amber); border: 1px solid rgba(232,160,69,0.2); }
+.status-oss { background: rgba(90,106,130,0.1); color: var(--muted); border: 1px solid rgba(90,106,130,0.18); }
+.proj-links { display: flex; gap: 1rem; }
+.proj-link { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+.proj-link:hover { color: var(--amber); }
+
+/* RESEARCH */
+.pub-list { margin-top: 4rem; display: flex; flex-direction: column; gap: 0; }
+.pub-item {
+  display: grid; grid-template-columns: 90px 1fr auto;
+  gap: 2rem; padding: 2rem 5vw; border-bottom: 1px solid var(--border);
+  align-items: start; transition: background 0.25s;
+  margin: 0 -5vw;
+}
+.pub-item:hover { background: var(--navy2); }
+.pub-year { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); padding-top: 0.4rem; }
+.pub-venue {
+  display: inline-block; padding: 0.2rem 0.6rem; margin-bottom: 0.5rem;
+  font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 2px;
+}
+.venue-samsung { background: rgba(232,160,69,0.1); color: var(--amber); border: 1px solid rgba(232,160,69,0.2); }
+.venue-thesis  { background: rgba(46,196,182,0.08); color: var(--teal); border: 1px solid rgba(46,196,182,0.15); }
+.venue-acad   { background: rgba(90,106,130,0.1); color: var(--muted); border: 1px solid rgba(90,106,130,0.18); }
+.pub-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--cream); margin-bottom: 0.4rem; line-height: 1.3; }
+.pub-authors { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; }
+.pub-authors strong { color: var(--amber2); font-weight: 500; }
+.pub-abs { font-size: 0.78rem; color: var(--muted); line-height: 1.65; max-width: 640px; }
+.pub-actions { display: flex; flex-direction: column; gap: 0.5rem; padding-top: 0.3rem; }
+.pub-btn {
+  padding: 0.35rem 0.9rem; font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+  border: 1px solid var(--border); color: var(--muted); border-radius: 2px;
+  text-align: center; transition: all 0.2s; white-space: nowrap;
+}
+.pub-btn:hover { border-color: var(--amber); color: var(--amber); background: rgba(232,160,69,0.05); }
+
+/* EXPERIENCE */
+.exp-grid { margin-top: 4rem; display: flex; flex-direction: column; gap: 1.5px; }
+.exp-item {
+  background: var(--navy3); display: grid; grid-template-columns: 200px 1fr;
+  gap: 3rem; padding: 2.5rem; border-left: 3px solid transparent;
+  transition: border-color 0.3s, background 0.3s; cursor: default;
+}
+.exp-item:hover { border-left-color: var(--amber); background: rgba(232,160,69,0.02); }
+.exp-period { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.exp-type {
+  display: inline-block; padding: 0.2rem 0.55rem; font-family: var(--mono);
+  font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 2px;
+}
+.type-senior { background: rgba(232,160,69,0.1); color: var(--amber); border: 1px solid rgba(232,160,69,0.2); }
+.type-swe { background: rgba(46,196,182,0.1); color: var(--teal); border: 1px solid rgba(46,196,182,0.2); }
+.type-mentor { background: rgba(90,106,130,0.1); color: var(--muted); border: 1px solid rgba(90,106,130,0.18); }
+.exp-role { font-family: var(--serif); font-size: 1.25rem; font-weight: 700; color: var(--cream); margin-bottom: 0.3rem; }
+.exp-company { font-size: 0.82rem; color: var(--amber2); margin-bottom: 0.75rem; }
+.exp-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; max-width: 580px; margin-bottom: 1rem; }
+.exp-highlights { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+.exp-highlights li { font-size: 0.78rem; color: var(--muted); padding-left: 1rem; position: relative; line-height: 1.5; }
+.exp-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--amber3); }
+
+/* STATS */
+.stats-bar {
+  background: var(--navy3); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  padding: 2.5rem 5vw; display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none; position: relative; z-index: 1;
+}
+.stats-bar::-webkit-scrollbar { display: none; }
+.stat-block {
+  flex: 1; min-width: 140px; padding: 0 2rem;
+  border-right: 1px solid var(--border); text-align: center;
+  display: flex; flex-direction: column; gap: 0.3rem;
+}
+.stat-block:first-child { padding-left: 0; }
+.stat-block:last-child { border-right: none; }
+.stat-val { font-family: var(--serif); font-size: 2.5rem; font-weight: 900; color: var(--amber); line-height: 1; }
+.stat-label { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* AWARDS */
+.awards-grid { margin-top: 4rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5px; background: var(--border); }
+.award-card {
+  background: var(--navy2); padding: 2rem 2.5rem;
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  transition: background 0.25s;
+}
+.award-card:hover { background: var(--navy3); }
+.award-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+.award-title { font-size: 0.92rem; font-weight: 600; color: var(--cream); margin-bottom: 0.3rem; }
+.award-org { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; }
+
+/* CONTACT */
+#contact {
+  background: var(--navy2); padding: 7rem 5vw;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem;
+  position: relative; z-index: 1; overflow: hidden;
+}
+.contact-bg-text {
+  position: absolute; left: -2vw; bottom: -3rem;
+  font-family: var(--serif); font-size: clamp(6rem, 15vw, 14rem);
+  font-weight: 900; font-style: italic;
+  color: rgba(232,160,69,0.03); pointer-events: none; user-select: none; line-height: 1;
+}
+.contact-big {
+  font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 5.5rem);
+  font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 1.5rem;
+}
+.contact-big em { color: var(--amber); font-style: italic; }
+.contact-para { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; max-width: 480px; }
+.contact-right { display: flex; flex-direction: column; justify-content: center; gap: 0; }
+.contact-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.25rem 0; border-bottom: 1px solid var(--border); transition: border-color 0.25s;
+}
+.contact-row:hover { border-bottom-color: var(--amber); }
+.contact-row:first-child { border-top: 1px solid var(--border); }
+.c-label { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+.c-val { font-size: 0.9rem; color: var(--text); }
+.c-val a { color: var(--amber); text-decoration: none; transition: color 0.2s; }
+.c-val a:hover { color: var(--amber2); }
+.c-arrow { color: var(--muted); font-size: 0.85rem; }
+
+footer {
+  background: var(--navy); padding: 1.5rem 5vw;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
+.footer-accent { color: var(--amber); }
+
+.divider { display: flex; align-items: center; gap: 1rem; padding: 0 5vw; margin: 0; opacity: 0.25; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--amber), transparent); }
+.divider-icon { font-size: 0.7rem; color: var(--amber); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s cubic-bezier(0.23,1,0.32,1), transform 0.65s cubic-bezier(0.23,1,0.32,1); }
+.reveal.revealed { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .pub-item { grid-template-columns: 1fr; }
+  .pub-year { display: none; }
+  .pub-actions { flex-direction: row; }
+  .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+  #contact { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-bg-text { display: none; }
+  .contact-bg-text { display: none; }
+  .nav-links { display: none; }
+  .nav-badge { display: none; }
+  .burger { display: flex; }
+  .awards-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .section { padding: 5rem 5vw; }
+  .hero-duality { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .duality-arrow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">Md. Yasin</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <span class="nav-badge">Open to Opportunities</span>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">YASIN</div>
+  <div class="hero-inner">
+    <div class="hero-tag">
+      Senior Software Engineer &nbsp;<span class="sep">·</span>&nbsp; ML Researcher &nbsp;<span class="sep">·</span>&nbsp; Tempe, AZ
+    </div>
+    <h1 class="hero-name">Md.<br><span class="highlight">Yasin</span></h1>
+    <div class="hero-duality">
+      <div class="duality-pill prev"><span class="icon">🔧</span> SWE @ Samsung Research (6 yrs)</div>
+      <div class="duality-arrow">→</div>
+      <div class="duality-pill now"><span class="icon">🔬</span> ML Researcher · Tempe, AZ</div>
+    </div>
+    <p class="hero-bio">
+      I'm a <strong>Senior Software Engineer</strong> with 6 years at <em>Samsung Research Bangladesh</em>, where I shipped production systems across medical ultrasound machines, enterprise Knox applications, and health platforms. My research bridges <strong>deep learning</strong> and <strong>real-world engineering</strong> — from diffusion models for medical imaging to time-series air quality forecasting. I thrive at the intersection of <em>software craftsmanship and applied ML</em>.
+    </p>
+    <div class="hero-cta">
+      <a href="#research" class="btn btn-amber">View Research →</a>
+      <a href="#experience" class="btn btn-ghost">My Journey</a>
+      <a href="mailto:yasinbuet1996@gmail.com" class="btn btn-ghost">Contact Me</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-block reveal"><span class="stat-val" data-target="6">0</span><span class="stat-label">Years at Samsung</span></div>
+  <div class="stat-block reveal reveal-delay-1"><span class="stat-val" data-target="3">0</span><span class="stat-label">Research Projects</span></div>
+  <div class="stat-block reveal reveal-delay-2"><span class="stat-val" data-target="80">0</span><span class="stat-label">% Load Time Reduced</span></div>
+  <div class="stat-block reveal reveal-delay-3"><span class="stat-val" data-target="5">0</span><span class="stat-label">Awards & Certs</span></div>
+  <div class="stat-block reveal reveal-delay-4"><span class="stat-val" data-target="100">0</span><span class="stat-label">+ UI Components Built</span></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="s-label reveal">About</div>
+  <h2 class="s-title reveal reveal-delay-1">Engineering meets <em>research</em></h2>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm a software engineer and ML researcher based in <strong>Tempe, Arizona</strong>, with a B.Sc. in Computer Science and Engineering from <em>Bangladesh University of Engineering and Technology (BUET)</em>. I graduated with a CGPA of 3.37/4.0 in 2019.
+      </p>
+      <p>
+        After BUET, I joined <strong>Samsung Research Bangladesh</strong>, where I spent six years building production systems for Samsung's medical ultrasound machines, Knox enterprise platform, and health applications. I wore many hats — <em>backend engineer, UI architect, ML prototype designer, DSA mentor</em> — and shipped across C#, .NET, React, NodeJS, and Swift.
+      </p>
+      <p>
+        Alongside my engineering work, I pursued applied ML research including a <em>diffusion-model-based super-resolution</em> system for ultrasound images and an <strong>undergraduate thesis</strong> on spatio-temporal air quality prediction for Dhaka. I'm passionate about building systems that are not just functional, but intelligent.
+      </p>
+
+      <div class="timeline" style="margin-top:2.5rem">
+        <div class="tl-title">// Career Path</div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot amber"></div><div class="tl-line"></div></div>
+          <div class="tl-year">2019–2025</div>
+          <div class="tl-body">
+            <div class="tl-role">Senior Software Engineer</div>
+            <div class="tl-place">Samsung Research Bangladesh</div>
+            <div class="tl-desc">Medical Solution Group · Health App Group · DSA Mentor. 6 years shipping production-grade systems at scale.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot teal"></div><div class="tl-line"></div></div>
+          <div class="tl-year">2015–2019</div>
+          <div class="tl-body">
+            <div class="tl-role">B.Sc. in Computer Science & Engineering</div>
+            <div class="tl-place">Bangladesh University of Engineering and Technology</div>
+            <div class="tl-desc">CGPA 3.37/4.0. Thesis on spatio-temporal air quality prediction. Courses in ML, AI, Compilers, OS, Networks.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-dot muted"></div></div>
+          <div class="tl-year">2018</div>
+          <div class="tl-body">
+            <div class="tl-role">TADHack Bangladesh — 2nd Runner-Up</div>
+            <div class="tl-place">Organised by Robi & Bdapps</div>
+            <div class="tl-desc">Built iDoc: disease prediction + health suggestion app using decision tree, SMS & Android.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-facts reveal reveal-delay-2">
+      <div class="fact-row"><span class="fact-label">Location</span><span class="fact-val">Tempe, AZ 85281</span></div>
+      <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val"><a href="mailto:yasinbuet1996@gmail.com">yasinbuet1996@gmail.com</a></span></div>
+      <div class="fact-row"><span class="fact-label">LinkedIn</span><span class="fact-val"><a href="https://linkedin.com/in/mohammad-yasin" target="_blank">mohammad-yasin ↗</a></span></div>
+      <div class="fact-row"><span class="fact-label">GitHub</span><span class="fact-val"><a href="https://github.com/mdyasin044" target="_blank">mdyasin044 ↗</a></span></div>
+      <div class="fact-row"><span class="fact-label">Education</span><span class="fact-val">B.Sc. CSE, BUET (2019)</span></div>
+      <div class="fact-row"><span class="fact-label">Past Role</span><span class="fact-val">Sr. SWE · Samsung Research BD (6 yrs)</span></div>
+      <div class="fact-row"><span class="fact-label">Research</span><span class="fact-val">Medical Imaging, Diffusion Models, Time-Series Forecasting</span></div>
+      <div class="fact-row"><span class="fact-label">Samsung Cert</span><span class="fact-val">Professional Software Certification 2021</span></div>
+      <div class="fact-row"><span class="fact-label">Competitive CP</span><span class="fact-val">Facebook Hacker Cup — Top 5% (2021)</span></div>
+      <div class="fact-row"><span class="fact-label">Training</span><span class="fact-val">2-month biz trip · South Korea (Samsung HQ)</span></div>
+      <div class="fact-row"><span class="fact-label">Outside Work</span><span class="fact-val">Sports committee BUET, Blood donation volunteer, Festival organizer</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">◆</span></div>
+
+<!-- SKILLS -->
+<section id="skills" class="section section-alt">
+  <div class="s-label reveal">Expertise</div>
+  <h2 class="s-title reveal reveal-delay-1">Technical <em>Skills</em></h2>
+  <p class="s-subtitle reveal reveal-delay-2">Six years of shipping production software across medical, enterprise, and health domains — paired with deep ML research experience.</p>
+
+  <div class="skills-wrap">
+    <div class="skill-card reveal">
+      <div class="skill-card-icon">💻</div>
+      <div class="skill-card-title">Languages</div>
+      <div class="skill-card-sub">Core proficiencies</div>
+      <div class="skill-pills">
+        <span class="pill pill-amber">Python</span>
+        <span class="pill pill-amber">JavaScript</span>
+        <span class="pill pill-amber">TypeScript</span>
+        <span class="pill pill-amber">C++</span>
+        <span class="pill pill-amber">C#</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-delay-1">
+      <div class="skill-card-icon">🔬</div>
+      <div class="skill-card-title">ML & Data Science</div>
+      <div class="skill-card-sub">Research & applied work</div>
+      <div class="skill-pills">
+        <span class="pill pill-teal">TensorFlow</span>
+        <span class="pill pill-teal">PyTorch</span>
+        <span class="pill pill-teal">Pandas</span>
+        <span class="pill pill-teal">Scikit-learn</span>
+        <span class="pill pill-teal">Diffusion Models</span>
+        <span class="pill pill-teal">SARIMAX</span>
+        <span class="pill pill-teal">Gensim</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-delay-2">
+      <div class="skill-card-icon">⚙️</div>
+      <div class="skill-card-title">Frameworks & Platforms</div>
+      <div class="skill-card-sub">Production experience</div>
+      <div class="skill-pills">
+        <span class="pill pill-amber">React</span>
+        <span class="pill pill-amber">Redux</span>
+        <span class="pill pill-amber">NodeJS</span>
+        <span class="pill pill-amber">Express</span>
+        <span class="pill pill-amber">Electron</span>
+        <span class="pill pill-amber">.NET / WPF</span>
+        <span class="pill pill-amber">Django</span>
+        <span class="pill pill-amber">SwiftUI</span>
+      </div>
+    </div>
+    <div class="skill-card reveal reveal-delay-3">
+      <div class="skill-card-icon">🗄️</div>
+      <div class="skill-card-title">Databases & Tools</div>
+      <div class="skill-card-sub">Data & infrastructure</div>
+      <div class="skill-pills">
+        <span class="pill pill-muted">MongoDB</span>
+        <span class="pill pill-muted">PostgreSQL</span>
+        <span class="pill pill-muted">SQLite</span>
+        <span class="pill pill-muted">Firebase</span>
+        <span class="pill pill-muted">OpenSSL</span>
+        <span class="pill pill-muted">WebRTC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">◆</span></div>
+
+<!-- PROJECTS -->
+<section id="projects" class="section">
+  <div class="s-label reveal">Selected Builds</div>
+  <h2 class="s-title reveal reveal-delay-1">Projects & <em>Products</em></h2>
+
+  <div class="projects-grid">
+    <div class="proj-card reveal">
+      <div class="proj-card-glow glow-teal"></div>
+      <div class="proj-num">01</div>
+      <div class="proj-type">Industry · Samsung Knox</div>
+      <div class="proj-title">KMED Configuration System</div>
+      <p class="proj-desc">Designed and built the configuration profile database with 100+ entries using MongoDB and Express for KMED under Samsung Knox. Architected dynamic UI with React-Redux integrating 100+ forms, reducing codebase by 50% through refactoring.</p>
+      <div class="proj-tags">
+        <span class="pill pill-teal">React</span><span class="pill pill-teal">Redux</span>
+        <span class="pill pill-amber">MongoDB</span><span class="pill pill-amber">Express</span><span class="pill pill-amber">NodeJS</span>
+      </div>
+      <div class="proj-footer">
+        <span class="proj-status status-live">Shipped · Production</span>
+        <div class="proj-links"><span class="proj-link">Samsung Knox</span></div>
+      </div>
+    </div>
+    <div class="proj-card reveal reveal-delay-1">
+      <div class="proj-card-glow glow-amber"></div>
+      <div class="proj-num">02</div>
+      <div class="proj-type">Industry · Samsung Ultrasound</div>
+      <div class="proj-title">Ultrasound Report Module</div>
+      <p class="proj-desc">Optimized data retrieval and rendering logic reducing report loading time by 80%. Built customizable UI components with C#, WPF, and .NET. Integrated touch functionality for the measurement module ensuring precise clinical interaction.</p>
+      <div class="proj-tags">
+        <span class="pill pill-amber">C#</span><span class="pill pill-amber">WPF</span>
+        <span class="pill pill-amber">.NET</span><span class="pill pill-muted">ML Models</span>
+      </div>
+      <div class="proj-footer">
+        <span class="proj-status status-live">Shipped · Medical Device</span>
+        <div class="proj-links"><span class="proj-link">Samsung Ultrasound</span></div>
+      </div>
+    </div>
+    <div class="proj-card reveal reveal-delay-2">
+      <div class="proj-card-glow glow-amber"></div>
+      <div class="proj-num">03</div>
+      <div class="proj-type">Side Project · 2023</div>
+      <div class="proj-title">Kothahok</div>
+      <p class="proj-desc">A video telephony software application with room creation, video calling, and text chat. Built entirely using WebRTC for peer-to-peer connections, NodeJS for signaling, and ReactJS for the frontend UI.</p>
+      <div class="proj-tags">
+        <span class="pill pill-teal">WebRTC</span><span class="pill pill-teal">NodeJS</span>
+        <span class="pill pill-teal">ReactJS</span>
+      </div>
+      <div class="proj-footer">
+        <span class="proj-status status-oss">Open Source</span>
+        <div class="proj-links"><a href="https://github.com/mdyasin044" class="proj-link">GitHub ↗</a></div>
+      </div>
+    </div>
+    <div class="proj-card reveal reveal-delay-3">
+      <div class="proj-card-glow glow-teal"></div>
+      <div class="proj-num">04</div>
+      <div class="proj-type">Hackathon · ROBI TADHack 2018</div>
+      <div class="proj-title">iDoc</div>
+      <p class="proj-desc">Team project that provides disease predictions using a decision tree classifier and delivers health suggestions via both SMS and an Android app. Presented at ROBI TADHack Bangladesh 2018, winning 2nd Runner-Up.</p>
+      <div class="proj-tags">
+        <span class="pill pill-teal">Android</span><span class="pill pill-teal">Decision Tree</span>
+        <span class="pill pill-muted">SMS API</span>
+      </div>
+      <div class="proj-footer">
+        <span class="proj-status status-oss">🥉 2nd Runner-Up</span>
+        <div class="proj-links"><a href="https://github.com/mdyasin044" class="proj-link">GitHub ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">◆</span></div>
+
+<!-- RESEARCH -->
+<section id="research" class="section section-alt">
+  <div class="s-label reveal">Research Output</div>
+  <h2 class="s-title reveal reveal-delay-1">Research <em>Experience</em></h2>
+  <p class="s-subtitle reveal reveal-delay-2">Applied ML research spanning medical imaging, environmental forecasting, and NLP — from Samsung R&D to undergraduate thesis work.</p>
+
+  <div class="pub-list">
+    <div class="pub-item reveal">
+      <div class="pub-year">2024</div>
+      <div>
+        <span class="pub-venue venue-samsung">Samsung Research BD · R&D</span>
+        <div class="pub-title">Deep Learning-based Super-Resolution of Ultrasound Images (SR3-style Diffusion Model)</div>
+        <div class="pub-authors"><strong>Md. Yasin</strong> · Samsung Research Bangladesh</div>
+        <p class="pub-abs">Implemented a denoising diffusion probabilistic model with an SR3-style U-Net architecture to enhance low-resolution medical ultrasound images. Achieved PSNR ≈ 32 dB and SSIM ≈ 0.93. Compared quantitatively and qualitatively against CNN and GAN-based baselines, showing competitive performance.</p>
+      </div>
+      <div class="pub-actions"><a href="#" class="pub-btn">Details</a></div>
+    </div>
+    <div class="pub-item reveal reveal-delay-1">
+      <div class="pub-year">2019</div>
+      <div>
+        <span class="pub-venue venue-thesis">Undergrad Thesis · BUET</span>
+        <div class="pub-title">Time Series Based Air Quality Prediction Model for Spatio-Temporal Data</div>
+        <div class="pub-authors"><strong>Md. Yasin</strong> · Supervised by Dr. Anindya Iqbal, BUET</div>
+        <p class="pub-abs">Collected and analyzed five years of urban air quality data from Dhaka. Developed and benchmarked forecasting models — SARIMAX, RNN, CNN, MLP — to predict PM concentrations. Achieved lowest MAE (5.48) and RMSE (7.98) with SARIMAX, outperforming deep learning baselines. Demonstrated potential for urban policy and health risk mitigation.</p>
+      </div>
+      <div class="pub-actions"><a href="#" class="pub-btn">Thesis</a></div>
+    </div>
+    <div class="pub-item reveal reveal-delay-2">
+      <div class="pub-year">2019</div>
+      <div>
+        <span class="pub-venue venue-acad">Academic Project · BUET</span>
+        <div class="pub-title">Email Clustering Using Doc2Vec</div>
+        <div class="pub-authors"><strong>Md. Yasin</strong> · BUET CSE Department</div>
+        <p class="pub-abs">Implemented unsupervised clustering of emails using Doc2Vec embeddings combined with K-Means to group semantically similar messages. Used Gensim, scikit-learn, and pandas for vectorization and analysis on a subset of the Enron email dataset.</p>
+      </div>
+      <div class="pub-actions"><a href="https://github.com/mdyasin044" class="pub-btn">GitHub</a></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">◆</span></div>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section">
+  <div class="s-label reveal">Work History</div>
+  <h2 class="s-title reveal reveal-delay-1">Professional <em>Experience</em></h2>
+
+  <div class="exp-grid">
+    <div class="exp-item reveal">
+      <div>
+        <div class="exp-period">Jun 2019 – Jul 2025</div>
+        <span class="exp-type type-senior">Senior SWE</span>
+      </div>
+      <div>
+        <div class="exp-role">Senior Software Engineer — Medical Solution Group</div>
+        <div class="exp-company">Samsung Research Bangladesh · Dhaka, Bangladesh</div>
+        <p class="exp-desc">Led development across Samsung Ultrasound Machine software, including report rendering, measurement modules, ML-powered features, and enterprise Knox integrations. Worked on critical clinical software used in real medical environments.</p>
+        <ul class="exp-highlights">
+          <li>Reduced report loading time by 80% via optimized data retrieval and rendering pipeline</li>
+          <li>Built customizable C# / WPF / .NET UI components for ultrasound report workflows</li>
+          <li>Integrated touch measurement module ensuring precision in clinical environments</li>
+          <li>Proposed and designed ML-based auto-suggest feature for report editing</li>
+          <li>Built KMED config DB with 100+ entries (MongoDB + Express) under Samsung Knox</li>
+          <li>Improved app performance by 25% via NodeJS memory leak and CPU profiling</li>
+          <li>Built Relay Server + QR code file-sharing system for enterprise closed networks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal reveal-delay-1">
+      <div>
+        <div class="exp-period">Jun 2019 – Jul 2025</div>
+        <span class="exp-type type-swe">Software Engineer</span>
+      </div>
+      <div>
+        <div class="exp-role">Software Engineer — Health Application Group</div>
+        <div class="exp-company">Samsung Research Bangladesh · Dhaka, Bangladesh</div>
+        <p class="exp-desc">Worked on the Samsung Health and Knox enterprise application front-end and security layer, building scalable UI systems and implementing license verification infrastructure.</p>
+        <ul class="exp-highlights">
+          <li>Designed React-Redux UI components integrating 100+ forms; 50% code reduction via refactoring</li>
+          <li>Implemented License Verification using OpenSSL to block unauthorized app installation</li>
+          <li>Designed UI screens using SwiftUI for Samsung Health iOS application</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item reveal reveal-delay-2">
+      <div>
+        <div class="exp-period">2019 – 2025</div>
+        <span class="exp-type type-mentor">DSA Mentor</span>
+      </div>
+      <div>
+        <div class="exp-role">DSA Mentor — Medical Solution Group</div>
+        <div class="exp-company">Samsung Research Bangladesh</div>
+        <p class="exp-desc">Mentored colleagues across the organization for Samsung's prestigious internal coding assessments, and contributed as a problem setter for competitive programming contests.</p>
+        <ul class="exp-highlights">
+          <li>Mentored engineers for Samsung Global Coding Test — Advanced & Professional tracks</li>
+          <li>Problem setter for SRBD monthly contests and SRBD Code Contest 2022</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">◆</span></div>
+
+<!-- AWARDS -->
+<section id="awards" class="section section-alt">
+  <div class="s-label reveal">Recognition</div>
+  <h2 class="s-title reveal reveal-delay-1">Awards & <em>Honors</em></h2>
+
+  <div class="awards-grid">
+    <div class="award-card reveal">
+      <div class="award-icon">🏆</div>
+      <div>
+        <div class="award-title">Samsung Professional Software Certification</div>
+        <div class="award-org">Samsung Research Bangladesh · 2021</div>
+      </div>
+    </div>
+    <div class="award-card reveal reveal-delay-1">
+      <div class="award-icon">🌟</div>
+      <div>
+        <div class="award-title">Excellence Certificate — Q4 2021</div>
+        <div class="award-org">Samsung Research Bangladesh · 2021</div>
+      </div>
+    </div>
+    <div class="award-card reveal reveal-delay-2">
+      <div class="award-icon">🥉</div>
+      <div>
+        <div class="award-title">TADHack Bangladesh — 2nd Runner-Up</div>
+        <div class="award-org">Organised by Robi & Bdapps · 2018</div>
+      </div>
+    </div>
+    <div class="award-card reveal reveal-delay-3">
+      <div class="award-icon">⚡</div>
+      <div>
+        <div class="award-title">Facebook Hacker Cup — Top 5% Globally</div>
+        <div class="award-org">Meta (Facebook) · 2021 & 2022 (Top 5% & 8%)</div>
+      </div>
+    </div>
+    <div class="award-card reveal">
+      <div class="award-icon">📜</div>
+      <div>
+        <div class="award-title">Secondary School Certificate Scholarship</div>
+        <div class="award-org">Ranked 89th Nationwide · Bangladesh · 2012</div>
+      </div>
+    </div>
+    <div class="award-card reveal reveal-delay-1">
+      <div class="award-icon">🌏</div>
+      <div>
+        <div class="award-title">Samsung Business Trip — South Korea</div>
+        <div class="award-org">2-month training on system architecture · Samsung HQ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span class="divider-icon">◆</span></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg-text">Hello.</div>
+  <div class="reveal">
+    <div class="s-label">Contact</div>
+    <div class="contact-big">Let's <em>connect.</em></div>
+    <p class="contact-para">
+      Open to new engineering roles, research collaborations, and exciting opportunities in software or applied ML. Whether you're hiring, researching, or just want to talk tech — I'd love to hear from you.
+    </p>
+    <a href="mailto:yasinbuet1996@gmail.com" class="btn btn-amber">Send an Email →</a>
+  </div>
+  <div class="contact-right reveal reveal-delay-2">
+    <div class="contact-row">
+      <span class="c-label">Email</span>
+      <span class="c-val"><a href="mailto:yasinbuet1996@gmail.com">yasinbuet1996@gmail.com</a></span>
+      <span class="c-arrow">↗</span>
+    </div>
+    <div class="contact-row">
+      <span class="c-label">Location</span>
+      <span class="c-val">1123 E Apache Blvd, Tempe, AZ 85281</span>
+      <span class="c-arrow"></span>
+    </div>
+    <div class="contact-row">
+      <span class="c-label">LinkedIn</span>
+      <span class="c-val"><a href="https://linkedin.com/in/mohammad-yasin" target="_blank">linkedin.com/in/mohammad-yasin</a></span>
+      <span class="c-arrow">↗</span>
+    </div>
+    <div class="contact-row">
+      <span class="c-label">GitHub</span>
+      <span class="c-val"><a href="https://github.com/mdyasin044" target="_blank">github.com/mdyasin044</a></span>
+      <span class="c-arrow">↗</span>
+    </div>
+    <div class="contact-row">
+      <span class="c-label">Past Role</span>
+      <span class="c-val" style="color:var(--teal)">Sr. SWE · Samsung Research BD (2019–2025)</span>
+      <span class="c-arrow"></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 <span class="footer-accent">Md. Yasin</span></span>
+  <span>Built with passion &amp; <span class="footer-accent">plain HTML</span></span>
+  <span>Tempe, AZ</span>
+</footer>
+
+<script>
+/* CURSOR */
+const dot = document.getElementById('cur-dot');
+const ring = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  dot.style.left=mx+'px';dot.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*0.14;ry+=(my-ry)*0.14;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button,.proj-card,.skill-card,.exp-item,.award-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.6)';ring.style.borderColor='rgba(232,160,69,0.8)';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(232,160,69,0.5)';});
+});
+
+/* PARTICLES */
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;}
+resize();window.addEventListener('resize',resize);
+class P{
+  constructor(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.r=Math.random()*1.2+.3;this.o=Math.random()*.35+.05;}
+  update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0)this.x=W;if(this.x>W)this.x=0;if(this.y<0)this.y=H;if(this.y>H)this.y=0;}
+  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=`rgba(232,160,69,${this.o})`;ctx.fill();}
+}
+for(let i=0;i<90;i++)particles.push(new P());
+function connect(){
+  for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){
+    const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<120){ctx.beginPath();ctx.strokeStyle=`rgba(232,160,69,${.08*(1-d/120)})`;ctx.lineWidth=.5;ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}
+  }
+}
+(function anim(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw();});connect();requestAnimationFrame(anim);})();
+
+/* NAV */
+const navbar=document.getElementById('navbar');
+const navLinks=document.querySelectorAll('.nav-links a');
+const sections=document.querySelectorAll('section[id]');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled',scrollY>60);
+  let cur='';
+  sections.forEach(s=>{if(scrollY>=s.offsetTop-200)cur=s.id;});
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+/* REVEAL */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('revealed');ro.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* COUNTERS */
+function animCount(el,target){
+  let c=0,step=target/50;
+  const t=setInterval(()=>{c+=step;if(c>=target){c=target;clearInterval(t);}el.textContent=Math.floor(c);},28);
+}
+const co=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){const el=e.target.querySelector('[data-target]');if(el)animCount(el,parseInt(el.dataset.target));co.unobserve(e.target);}});
+},{threshold:0.5});
+document.querySelectorAll('.stat-block').forEach(b=>co.observe(b));
+
+/* MOBILE BURGER */
+document.getElementById('burger').addEventListener('click',()=>{
+  const l=document.querySelector('.nav-links');
+  const open=l.style.display==='flex';
+  Object.assign(l.style,{display:open?'none':'flex',flexDirection:'column',position:'absolute',top:'100%',left:'0',right:'0',background:'rgba(9,16,31,0.97)',padding:'1rem 5vw',borderBottom:'1px solid #1e2f47'});
+});
+</script>
+</body>
+</html>
