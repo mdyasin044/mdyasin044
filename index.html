@@ -101,8 +101,10 @@ nav.scrolled { padding: 0.8rem 5vw; }
 /* HERO */
 #hero {
   min-height: 100vh; position: relative; z-index: 1;
-  display: flex; flex-direction: column; justify-content: center;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
   padding: 7rem 5vw 4rem; overflow: hidden;
+  gap: 2rem;
 }
 .hero-bg-text {
   position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
@@ -443,6 +445,8 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
   .pub-actions { flex-direction: row; }
   .exp-item { grid-template-columns: 1fr; gap: 1rem; }
   #contact { grid-template-columns: 1fr; gap: 3rem; }
+  #hero { grid-template-columns: 1fr; display: flex; flex-direction: column; gap: 3rem; padding-bottom: 4rem; }
+  .hero-anim { display: flex; width: 100%; justify-content: center; }
   .hero-bg-text { display: none; }
   .contact-bg-text { display: none; }
   .nav-links { display: none; }
@@ -454,6 +458,70 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
   .section { padding: 5rem 5vw; }
   .hero-duality { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   .duality-arrow { display: none; }
+}
+
+/* CODING ANIMATION */
+.hero-anim {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; animation: fadeUp 0.9s ease 0.9s forwards;
+}
+.desk-scene {
+  width: 100%; max-width: 460px;
+  filter: drop-shadow(0 0 40px rgba(232,160,69,0.1));
+}
+.code-float {
+  position: absolute;
+  font-family: var(--mono); font-size: 0.62rem;
+  background: rgba(14,25,41,0.95);
+  border: 1px solid rgba(232,160,69,0.22);
+  border-radius: 4px;
+  padding: 0.45rem 0.8rem;
+  color: var(--amber2);
+  white-space: nowrap;
+  pointer-events: none;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  z-index: 5;
+}
+.code-float-1 { top: 6%; right: 0%; animation: floatA 6s ease-in-out infinite; }
+.code-float-2 { top: 40%; right: -4%; animation: floatB 7s ease-in-out 1s infinite; color: var(--teal); border-color: rgba(46,196,182,0.22); }
+.code-float-3 { bottom: 14%; right: 2%; animation: floatA 5.5s ease-in-out 2s infinite; color: #c084fc; border-color: rgba(192,132,252,0.22); }
+@keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-10px) rotate(1deg)} }
+@keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg)} 50%{transform:translateY(-14px) rotate(-1deg)} }
+.screen-glow { animation: screenGlow 3s ease-in-out infinite; }
+@keyframes screenGlow { 0%,100%{opacity:0.9} 50%{opacity:1;filter:brightness(1.18)} }
+.typing-cursor { animation: blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.code-line-1{animation:typeIn 0.35s ease 1.3s both}
+.code-line-2{animation:typeIn 0.35s ease 1.8s both}
+.code-line-3{animation:typeIn 0.35s ease 2.3s both}
+.code-line-4{animation:typeIn 0.35s ease 2.8s both}
+.code-line-5{animation:typeIn 0.35s ease 3.3s both}
+.code-line-6{animation:typeIn 0.35s ease 3.8s both}
+.code-line-7{animation:typeIn 0.35s ease 4.3s both}
+@keyframes typeIn { from{opacity:0;transform:translateX(-3px)} to{opacity:1;transform:none} }
+.steam-1{animation:steam 2.8s ease-in-out infinite;transform-origin:bottom center}
+.steam-2{animation:steam 2.8s ease-in-out 0.9s infinite;transform-origin:bottom center}
+.steam-3{animation:steam 2.8s ease-in-out 1.8s infinite;transform-origin:bottom center}
+@keyframes steam { 0%{transform:translateY(0) scaleX(1);opacity:0.7} 100%{transform:translateY(-16px) scaleX(1.5);opacity:0} }
+.hands{animation:typing 0.25s steps(1) infinite}
+@keyframes typing { 0%,100%{transform:translateY(0)} 50%{transform:translateY(2.5px)} }
+10%{opacity:1}80%{opacity:0.8}100%{transform:translateY(20px);opacity:0}}
+.portfolio-scroll{/* animation handled by SVG animateTransform */}
+@keyframes portfolioSlide{0%{transform:translateY(0)}80%{transform:translateY(-300px)}88%{transform:translateY(-300px);opacity:1}93%{opacity:0;transform:translateY(-300px)}94%{opacity:0;transform:translateY(0)}97%{opacity:1;transform:translateY(0)}100%{transform:translateY(0)}}
+50%{opacity:1;transform:scale(1.35)}}
+50%{opacity:1;transform:scale(1.4)}}
+50%{opacity:1;transform:scale(1.3)}}
+100%{transform:translate(270px,155px);opacity:0}}
+100%{transform:translate(175px,230px);opacity:0}}
+100%{transform:translate(145px,150px);opacity:0}}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-family: var(--mono); font-size: 0.72rem; color: var(--amber);
+  letter-spacing: 0.12em; margin-bottom: 2rem; opacity: 0;
+  animation: fadeUp 0.7s ease 0.2s forwards;
 }
 </style>
 </head>
@@ -498,9 +566,270 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
     <div class="hero-cta">
       <a href="#research" class="btn btn-amber">View Research →</a>
       <a href="#experience" class="btn btn-ghost">My Journey</a>
-      <a href="mailto:yasinbuet1996@gmail.com" class="btn btn-ghost">Contact Me</a>
+      <a href="#contact" class="btn btn-ghost">Contact Me</a>
     </div>
   </div>
+
+  <!-- RIGHT: Animated coding scene -->
+  <div class="hero-anim">
+    <!-- Floating code chips -->
+    <div class="code-float code-float-1">🌐 mdyasin044.github.io</div>
+    <div class="code-float code-float-2">↓ scroll to explore portfolio</div>
+    <div class="code-float code-float-3">✓ live · deployed on GitHub Pages</div>
+
+    <!-- Main SVG scene -->
+    <svg class="desk-scene" viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" fill="none">
+
+      <!-- Ambient desk glow -->
+      <ellipse cx="230" cy="410" rx="160" ry="18" fill="rgba(232,160,69,0.08)"/>
+
+      <!-- Desk surface -->
+      <rect x="30" y="310" width="400" height="14" rx="4" fill="#1a2a3e"/>
+      <rect x="50" y="322" width="360" height="6" rx="2" fill="#142030"/>
+
+      <!-- Monitor stand -->
+      <rect x="205" y="298" width="50" height="14" rx="3" fill="#1e3050"/>
+      <rect x="185" y="310" width="90" height="8" rx="3" fill="#253d5a"/>
+
+      <!-- Monitor body -->
+      <rect x="60" y="55" width="340" height="245" rx="10" fill="#0e1929"/>
+      <rect x="62" y="57" width="336" height="241" rx="9" fill="#0a1520"/>
+      <rect x="62" y="57" width="336" height="4" rx="2" fill="rgba(255,255,255,0.04)"/>
+      <rect x="60" y="55" width="340" height="245" rx="10" stroke="rgba(232,160,69,0.3)" stroke-width="1.5"/>
+
+      <!-- Screen area -->
+      <rect x="72" y="68" width="316" height="210" rx="5" fill="#060d18"/>
+
+      <!-- Browser chrome -->
+      <rect x="72" y="68" width="316" height="20" rx="5" fill="#0d1b2e"/>
+      <rect x="72" y="80" width="316" height="8" fill="#0d1b2e"/>
+      <!-- browser dots -->
+      <circle cx="87" cy="78" r="3.5" fill="#ff5f57"/>
+      <circle cx="100" cy="78" r="3.5" fill="#ffbd2e"/>
+      <circle cx="113" cy="78" r="3.5" fill="#28ca41"/>
+      <!-- address bar -->
+      <rect x="128" y="72" width="200" height="12" rx="4" fill="#0a1828"/>
+      <text x="134" y="82" font-family="monospace" font-size="6.5" fill="rgba(134,239,172,0.8)">🔒 mdyasin044.github.io</text>
+
+      <!-- clipping mask for scroll area -->
+      <defs>
+        <clipPath id="screenMask">
+          <rect x="72" y="88" width="316" height="190"/>
+        </clipPath>
+        <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#e8a045" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#e8a045" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- ===== SCROLLING PORTFOLIO PREVIEW ===== -->
+      <!-- static clip wrapper - clip stays fixed, only inner group scrolls -->
+      <g clip-path="url(#screenMask)">
+      <g>
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0,0; 0,0; 0,-300; 0,-300; 0,-300; 0,0; 0,0"
+          keyTimes="0; 0.05; 0.80; 0.88; 0.94; 0.97; 1"
+          calcMode="spline"
+          keySplines="0.4 0 0.2 1; 0.4 0 0.2 1; 0 0 1 1; 0 0 1 1; 0.4 0 0.2 1; 0 0 1 1"
+          dur="14s"
+          repeatCount="indefinite"
+        />
+
+        <!-- ============ HERO ============ -->
+        <rect x="72" y="88" width="316" height="110" fill="#09101f"/>
+        <!-- particle dots scatter -->
+        <circle cx="330" cy="97"  r="1.5" fill="rgba(232,160,69,0.5)"/>
+        <circle cx="355" cy="112" r="1"   fill="rgba(232,160,69,0.3)"/>
+        <circle cx="344" cy="128" r="1.5" fill="rgba(46,196,182,0.4)"/>
+        <circle cx="370" cy="120" r="1"   fill="rgba(192,132,252,0.35)"/>
+        <circle cx="362" cy="143" r="1.5" fill="rgba(232,160,69,0.3)"/>
+        <circle cx="320" cy="148" r="1"   fill="rgba(46,196,182,0.3)"/>
+        <circle cx="375" cy="100" r="1.2" fill="rgba(192,132,252,0.25)"/>
+        <circle cx="340" cy="155" r="0.8" fill="rgba(232,160,69,0.2)"/>
+        <!-- nav -->
+        <rect x="72" y="88" width="316" height="11" fill="#0d1929"/>
+        <text x="82" y="97"  font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.85)" font-weight="bold">Md. Yasin</text>
+        <text x="274" y="97" font-family="monospace" font-size="4.5" fill="rgba(140,155,175,0.6)">About · Skills · Work · Contact</text>
+        <!-- eyebrow label -->
+        <text x="82" y="113" font-family="monospace" font-size="5" fill="rgba(232,160,69,0.65)" letter-spacing="1.5">ML RESEARCHER · SWE</text>
+        <!-- name -->
+        <text x="82" y="129" font-family="Georgia,serif" font-size="16" fill="white" font-weight="bold">Md. Yasin</text>
+        <!-- subtitle -->
+        <text x="82" y="141" font-family="monospace" font-size="6" fill="rgba(180,190,210,0.8)">Samsung Research · BUET · Tempe, AZ</text>
+        <!-- desc -->
+        <text x="82" y="152" font-family="monospace" font-size="5.5" fill="rgba(140,155,175,0.6)">Building intelligent systems at the intersection</text>
+        <text x="82" y="161" font-family="monospace" font-size="5.5" fill="rgba(140,155,175,0.6)">of machine learning &amp; software engineering.</text>
+        <!-- CTA buttons -->
+        <rect x="82"  y="167" width="48" height="14" rx="3" fill="#e8a045"/>
+        <text x="106" y="178" font-family="monospace" font-size="6" fill="#09101f" font-weight="bold" text-anchor="middle">VIEW RESEARCH</text>
+        <rect x="136" y="167" width="44" height="14" rx="3" fill="transparent" stroke="rgba(232,160,69,0.55)" stroke-width="1"/>
+        <text x="158" y="178" font-family="monospace" font-size="6" fill="rgba(232,160,69,0.8)" text-anchor="middle">MY JOURNEY</text>
+        <rect x="186" y="167" width="54" height="14" rx="3" fill="transparent" stroke="rgba(200,200,200,0.2)" stroke-width="1"/>
+        <text x="213" y="178" font-family="monospace" font-size="5.5" fill="rgba(200,200,200,0.45)" text-anchor="middle">CONTACT ME</text>
+
+        <!-- ============ STATS BAR ============ -->
+        <rect x="72" y="198" width="316" height="20" fill="#0d1929"/>
+        <line x1="72"  y1="198" x2="388" y2="198" stroke="rgba(232,160,69,0.18)" stroke-width="0.5"/>
+        <line x1="72"  y1="218" x2="388" y2="218" stroke="rgba(232,160,69,0.18)" stroke-width="0.5"/>
+        <text x="90"  y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(232,160,69,1)"    font-weight="bold">6+</text>
+        <text x="103" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> yrs exp</text>
+        <line x1="150" y1="201" x2="150" y2="215" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
+        <text x="158" y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(46,196,182,1)"    font-weight="bold">3</text>
+        <text x="165" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> research</text>
+        <line x1="215" y1="201" x2="215" y2="215" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
+        <text x="222" y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(232,160,69,1)"    font-weight="bold">80%</text>
+        <text x="244" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> faster</text>
+        <line x1="290" y1="201" x2="290" y2="215" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
+        <text x="298" y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(134,239,172,1)"   font-weight="bold">5</text>
+        <text x="307" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> awards</text>
+
+        <!-- ============ SKILLS ============ -->
+        <rect x="72" y="218" width="316" height="96" fill="#09101f"/>
+        <!-- section title -->
+        <text x="230" y="234" font-family="Georgia,serif" font-size="10" fill="white" font-weight="bold" text-anchor="middle">Skills</text>
+        <line x1="196" y1="237" x2="264" y2="237" stroke="rgba(232,160,69,0.55)" stroke-width="1"/>
+        <!-- pills row 1 -->
+        <rect x="82"  y="242" width="32" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
+        <text x="98"  y="249.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">Python</text>
+        <rect x="118" y="242" width="36" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
+        <text x="136" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">PyTorch</text>
+        <rect x="158" y="242" width="30" height="9" rx="2.5" fill="rgba(192,132,252,0.12)" stroke="rgba(192,132,252,0.4)" stroke-width="0.6"/>
+        <text x="173" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(192,132,252,0.95)" text-anchor="middle">React</text>
+        <rect x="192" y="242" width="24" height="9" rx="2.5" fill="rgba(134,239,172,0.12)" stroke="rgba(134,239,172,0.4)" stroke-width="0.6"/>
+        <text x="204" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(134,239,172,0.95)" text-anchor="middle">C++</text>
+        <rect x="220" y="242" width="38" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
+        <text x="239" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">TypeScript</text>
+        <rect x="262" y="242" width="24" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
+        <text x="274" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">C#</text>
+        <!-- pills row 2 -->
+        <rect x="82"  y="254" width="26" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
+        <text x="95"  y="261.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">Node</text>
+        <rect x="112" y="254" width="44" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
+        <text x="134" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">TensorFlow</text>
+        <rect x="160" y="254" width="32" height="9" rx="2.5" fill="rgba(192,132,252,0.12)" stroke="rgba(192,132,252,0.4)" stroke-width="0.6"/>
+        <text x="176" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(192,132,252,0.95)" text-anchor="middle">Django</text>
+        <rect x="196" y="254" width="36" height="9" rx="2.5" fill="rgba(134,239,172,0.12)" stroke="rgba(134,239,172,0.4)" stroke-width="0.6"/>
+        <text x="214" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(134,239,172,0.95)" text-anchor="middle">MongoDB</text>
+        <rect x="236" y="254" width="30" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
+        <text x="251" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">SwiftUI</text>
+        <rect x="270" y="254" width="24" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
+        <text x="282" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">.NET</text>
+        <!-- skill bars -->
+        <text x="82"  y="279" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">ML / AI</text>
+        <rect x="110" y="272" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+        <rect x="110" y="272" width="99"  height="6" rx="2" fill="rgba(232,160,69,0.7)"/>
+        <text x="82"  y="291" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">Frontend</text>
+        <rect x="110" y="284" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+        <rect x="110" y="284" width="90"  height="6" rx="2" fill="rgba(46,196,182,0.7)"/>
+        <text x="82"  y="303" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">Backend</text>
+        <rect x="110" y="296" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
+        <rect x="110" y="296" width="82"  height="6" rx="2" fill="rgba(192,132,252,0.7)"/>
+
+        <!-- ============ EXPERIENCE ============ -->
+        <rect x="72" y="314" width="316" height="96" fill="#09101f"/>
+        <text x="230" y="330" font-family="Georgia,serif" font-size="10" fill="white" font-weight="bold" text-anchor="middle">Experience</text>
+        <line x1="186" y1="333" x2="274" y2="333" stroke="rgba(232,160,69,0.55)" stroke-width="1"/>
+        <!-- Samsung card -->
+        <rect x="82" y="338" width="274" height="34" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(232,160,69,0.22)" stroke-width="0.8"/>
+        <rect x="82" y="338" width="3.5" height="34" rx="1" fill="rgba(232,160,69,0.8)"/>
+        <text x="92" y="350" font-family="monospace" font-size="6" fill="rgba(232,160,69,0.95)" font-weight="bold">Samsung Research Bangladesh</text>
+        <text x="92" y="360" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">Senior SWE · Medical Solution Group · 2019–2025</text>
+        <text x="92" y="369" font-family="monospace" font-size="5" fill="rgba(134,239,172,0.75)">↓ 80% report load · ML auto-suggest · Knox DB</text>
+        <!-- BUET card -->
+        <rect x="82" y="376" width="274" height="30" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(46,196,182,0.22)" stroke-width="0.8"/>
+        <rect x="82" y="376" width="3.5" height="30" rx="1" fill="rgba(46,196,182,0.8)"/>
+        <text x="92" y="388" font-family="monospace" font-size="6" fill="rgba(46,196,182,0.95)" font-weight="bold">Bangladesh University of Eng. &amp; Technology</text>
+        <text x="92" y="398" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">B.Sc. CSE · 2015–2019 · CGPA 3.37/4.0</text>
+
+        <!-- ============ RESEARCH ============ -->
+        <rect x="72" y="410" width="316" height="112" fill="#09101f"/>
+        <text x="230" y="426" font-family="Georgia,serif" font-size="10" fill="white" font-weight="bold" text-anchor="middle">Research</text>
+        <line x1="196" y1="429" x2="264" y2="429" stroke="rgba(192,132,252,0.55)" stroke-width="1"/>
+        <!-- paper 1 -->
+        <rect x="82" y="433" width="274" height="28" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(192,132,252,0.22)" stroke-width="0.8"/>
+        <rect x="82" y="433" width="3.5" height="28" rx="1" fill="rgba(192,132,252,0.8)"/>
+        <text x="92" y="445" font-family="monospace" font-size="5.5" fill="rgba(192,132,252,0.95)">SR3 Diffusion Model · Ultrasound Super-Resolution</text>
+        <text x="92" y="455" font-family="monospace" font-size="5"   fill="rgba(134,239,172,0.75)">PSNR ≈ 32 dB · SSIM ≈ 0.93</text>
+        <!-- paper 2 -->
+        <rect x="82" y="465" width="274" height="28" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(46,196,182,0.22)" stroke-width="0.8"/>
+        <rect x="82" y="465" width="3.5" height="28" rx="1" fill="rgba(46,196,182,0.8)"/>
+        <text x="92" y="477" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)">Time Series Air Quality Prediction · SARIMAX</text>
+        <text x="92" y="487" font-family="monospace" font-size="5"   fill="rgba(134,239,172,0.75)">MAE: 5.48 · RMSE: 7.98 · Advisor: Dr. Anindya Iqbal</text>
+        <!-- paper 3 -->
+        <rect x="82" y="497" width="274" height="22" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(232,160,69,0.22)" stroke-width="0.8"/>
+        <rect x="82" y="497" width="3.5" height="22" rx="1" fill="rgba(232,160,69,0.8)"/>
+        <text x="92" y="511" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)">Email Clustering · Doc2Vec · Enron Dataset</text>
+
+        <!-- ============ CONTACT / FOOTER ============ -->
+        <rect x="72" y="522" width="316" height="56" fill="#0d1929"/>
+        <line x1="72" y1="522" x2="388" y2="522" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
+        <text x="230" y="541" font-family="Georgia,serif" font-size="11" fill="white" font-weight="bold" text-anchor="middle">Let's Build Something</text>
+        <text x="230" y="552" font-family="monospace" font-size="5.5" fill="rgba(140,155,175,0.55)" text-anchor="middle">Open to ML research roles &amp; SWE opportunities</text>
+        <rect x="182" y="556" width="96" height="14" rx="3" fill="#e8a045"/>
+        <text x="230" y="567" font-family="monospace" font-size="6" fill="#09101f" font-weight="bold" text-anchor="middle">Say Hello →</text>
+
+      </g><!-- end scroll group -->
+      </g><!-- end clip wrapper -->
+
+      <!-- screen glow overlay -->
+      <rect x="72" y="88" width="316" height="190" fill="url(#screenGlow)" opacity="0.06"/>
+
+      <!-- Keyboard -->
+      <rect x="110" y="328" width="240" height="55" rx="6" fill="#1a2a3e"/>
+      <rect x="112" y="330" width="236" height="51" rx="5" fill="#162030"/>
+      <g fill="#1e3050">
+        <rect x="118" y="334" width="16" height="10" rx="2"/><rect x="137" y="334" width="16" height="10" rx="2"/>
+        <rect x="156" y="334" width="16" height="10" rx="2"/><rect x="175" y="334" width="16" height="10" rx="2"/>
+        <rect x="194" y="334" width="16" height="10" rx="2"/><rect x="213" y="334" width="16" height="10" rx="2"/>
+        <rect x="232" y="334" width="16" height="10" rx="2"/><rect x="251" y="334" width="16" height="10" rx="2"/>
+        <rect x="270" y="334" width="16" height="10" rx="2"/><rect x="289" y="334" width="16" height="10" rx="2"/>
+        <rect x="308" y="334" width="16" height="10" rx="2"/>
+        <rect x="118" y="347" width="22" height="10" rx="2"/><rect x="143" y="347" width="16" height="10" rx="2"/>
+        <rect x="162" y="347" width="16" height="10" rx="2"/><rect x="181" y="347" width="16" height="10" rx="2"/>
+        <rect x="200" y="347" width="16" height="10" rx="2"/><rect x="219" y="347" width="16" height="10" rx="2"/>
+        <rect x="238" y="347" width="16" height="10" rx="2"/><rect x="257" y="347" width="16" height="10" rx="2"/>
+        <rect x="276" y="347" width="16" height="10" rx="2"/><rect x="295" y="347" width="22" height="10" rx="2"/>
+        <rect x="118" y="360" width="28" height="10" rx="2"/>
+        <rect x="149" y="360" width="16" height="10" rx="2"/><rect x="168" y="360" width="16" height="10" rx="2"/>
+        <rect x="187" y="360" width="16" height="10" rx="2"/><rect x="206" y="360" width="16" height="10" rx="2"/>
+        <rect x="225" y="360" width="16" height="10" rx="2"/><rect x="244" y="360" width="16" height="10" rx="2"/>
+        <rect x="263" y="360" width="28" height="10" rx="2"/>
+        <rect x="160" y="373" width="110" height="8" rx="2"/>
+      </g>
+      <g class="hands">
+        <rect x="194" y="347" width="16" height="10" rx="2" fill="rgba(232,160,69,0.25)"/>
+        <rect x="262" y="347" width="16" height="10" rx="2" fill="rgba(232,160,69,0.18)"/>
+      </g>
+
+      <!-- Coffee mug -->
+      <g transform="translate(358, 290)">
+        <rect x="0" y="14" width="34" height="30" rx="4" fill="#1e3050"/>
+        <rect x="2" y="16" width="30" height="26" rx="3" fill="#253d5a"/>
+        <path d="M34 20 Q46 20 46 29 Q46 38 34 38" stroke="#1e3050" stroke-width="5" stroke-linecap="round" fill="none"/>
+        <ellipse cx="17" cy="16" rx="15" ry="4" fill="#3d2b1a"/>
+        <ellipse cx="17" cy="15" rx="13" ry="3" fill="#5c3d1e"/>
+        <text x="6" y="34" font-family="monospace" font-size="7" fill="rgba(232,160,69,0.6)">☕</text>
+        <path d="M10 14 Q12 8 10 2" stroke="rgba(232,160,69,0.4)" stroke-width="1.5" stroke-linecap="round" class="steam-1"/>
+        <path d="M17 12 Q19 6 17 0" stroke="rgba(232,160,69,0.3)" stroke-width="1.5" stroke-linecap="round" class="steam-2"/>
+        <path d="M24 14 Q26 8 24 2" stroke="rgba(232,160,69,0.35)" stroke-width="1.5" stroke-linecap="round" class="steam-3"/>
+      </g>
+
+      <!-- Small plant -->
+      <g transform="translate(62, 288)">
+        <rect x="4" y="18" width="20" height="16" rx="3" fill="#1e3050"/>
+        <rect x="6" y="20" width="16" height="12" rx="2" fill="#253d5a"/>
+        <ellipse cx="14" cy="10" rx="10" ry="12" fill="#1a4a2a"/>
+        <ellipse cx="8" cy="14" rx="7" ry="9" fill="#1e5c30"/>
+        <ellipse cx="20" cy="13" rx="7" ry="9" fill="#1e5c30"/>
+        <ellipse cx="14" cy="6" rx="6" ry="8" fill="#2a7a40"/>
+      </g>
+
+    </svg>
+  </div>
+
+
   <div class="hero-scroll">
     <span class="scroll-text">Scroll</span>
     <div class="scroll-line"></div>
@@ -918,12 +1247,12 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
 </section>
 
 <footer>
-  <span>© 2025 <span class="footer-accent">Md. Yasin</span></span>
+  <span>© 2026 <span class="footer-accent">Md. Yasin</span></span>
   <span>Built with passion &amp; <span class="footer-accent">fueled by coffee</span></span>
   <span>Tempe, AZ</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* CURSOR */
 const dot = document.getElementById('cur-dot');
 const ring = document.getElementById('cur-ring');
