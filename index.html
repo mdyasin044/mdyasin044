@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Md. Yasin — Senior SWE & Researcher</title>
+<title>Md. Yasin</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230e1929'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-weight='900' fill='%23fb923c'>Y</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -100,93 +101,17 @@ nav.scrolled { padding: 0.8rem 5vw; }
 /* HERO */
 #hero {
   min-height: 100vh; position: relative; z-index: 1;
-  display: grid; grid-template-columns: 1fr 1fr;
-  align-items: center;
+  display: flex; flex-direction: column; justify-content: center;
   padding: 7rem 5vw 4rem; overflow: hidden;
-  gap: 2rem;
 }
 .hero-bg-text {
-  position: absolute; left: -2vw; top: 50%; transform: translateY(-50%);
+  position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
   font-family: var(--serif); font-size: clamp(8rem, 18vw, 18rem);
   font-weight: 900; font-style: italic;
-  color: rgba(232,160,69,0.03);
+  color: rgba(232,160,69,0.04);
   line-height: 1; pointer-events: none; user-select: none; white-space: nowrap;
 }
-.hero-inner { max-width: 680px; position: relative; z-index: 2; }
-
-/* CODING ANIMATION */
-.hero-anim {
-  position: relative; z-index: 2;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; animation: fadeUp 0.9s ease 0.9s forwards;
-}
-.desk-scene {
-  width: 100%; max-width: 460px;
-  filter: drop-shadow(0 0 40px rgba(232,160,69,0.1));
-}
-.code-float {
-  position: absolute;
-  font-family: var(--mono); font-size: 0.62rem;
-  background: rgba(14,25,41,0.95);
-  border: 1px solid rgba(232,160,69,0.22);
-  border-radius: 4px;
-  padding: 0.45rem 0.8rem;
-  color: var(--amber2);
-  white-space: nowrap;
-  pointer-events: none;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  z-index: 5;
-}
-.code-float-1 { top: 6%; right: 0%; animation: floatA 6s ease-in-out infinite; }
-.code-float-2 { top: 40%; right: -4%; animation: floatB 7s ease-in-out 1s infinite; color: var(--teal); border-color: rgba(46,196,182,0.22); }
-.code-float-3 { bottom: 14%; right: 2%; animation: floatA 5.5s ease-in-out 2s infinite; color: #c084fc; border-color: rgba(192,132,252,0.22); }
-@keyframes floatA { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-10px) rotate(1deg)} }
-@keyframes floatB { 0%,100%{transform:translateY(0) rotate(1deg)} 50%{transform:translateY(-14px) rotate(-1deg)} }
-.screen-glow { animation: screenGlow 3s ease-in-out infinite; }
-@keyframes screenGlow { 0%,100%{opacity:0.9} 50%{opacity:1;filter:brightness(1.18)} }
-.typing-cursor { animation: blink 1s step-end infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-.code-line-1{animation:typeIn 0.35s ease 1.3s both}
-.code-line-2{animation:typeIn 0.35s ease 1.8s both}
-.code-line-3{animation:typeIn 0.35s ease 2.3s both}
-.code-line-4{animation:typeIn 0.35s ease 2.8s both}
-.code-line-5{animation:typeIn 0.35s ease 3.3s both}
-.code-line-6{animation:typeIn 0.35s ease 3.8s both}
-.code-line-7{animation:typeIn 0.35s ease 4.3s both}
-@keyframes typeIn { from{opacity:0;transform:translateX(-3px)} to{opacity:1;transform:none} }
-.steam-1{animation:steam 2.8s ease-in-out infinite;transform-origin:bottom center}
-.steam-2{animation:steam 2.8s ease-in-out 0.9s infinite;transform-origin:bottom center}
-.steam-3{animation:steam 2.8s ease-in-out 1.8s infinite;transform-origin:bottom center}
-@keyframes steam { 0%{transform:translateY(0) scaleX(1);opacity:0.7} 100%{transform:translateY(-16px) scaleX(1.5);opacity:0} }
-.hands{animation:typing 0.25s steps(1) infinite}
-@keyframes typing { 0%,100%{transform:translateY(0)} 50%{transform:translateY(2.5px)} }
-.mc-0{animation:matrixFall 3.0s linear infinite}
-.mc-1{animation:matrixFall 2.4s linear 0.3s infinite}
-.mc-2{animation:matrixFall 3.5s linear 0.7s infinite}
-.mc-3{animation:matrixFall 2.8s linear 1.1s infinite}
-.mc-4{animation:matrixFall 3.2s linear 0.5s infinite}
-.mc-5{animation:matrixFall 2.6s linear 1.4s infinite}
-.mc-6{animation:matrixFall 3.8s linear 0.2s infinite}
-.mc-7{animation:matrixFall 2.9s linear 0.9s infinite}
-.mc-8{animation:matrixFall 3.3s linear 1.6s infinite}
-.mc-9{animation:matrixFall 2.5s linear 0.4s infinite}
-@keyframes matrixFall{0%{transform:translateY(-120px);opacity:0}10%{opacity:1}80%{opacity:0.8}100%{transform:translateY(20px);opacity:0}}
-.portfolio-scroll{animation:portfolioSlide 14s ease-in-out infinite}
-@keyframes portfolioSlide{0%{transform:translateY(0)}80%{transform:translateY(-300px)}88%{transform:translateY(-300px);opacity:1}93%{opacity:0;transform:translateY(-300px)}94%{opacity:0;transform:translateY(0)}97%{opacity:1;transform:translateY(0)}100%{transform:translateY(0)}}
-.node-pulse-a{animation:pulseA 2.8s ease-in-out infinite}
-.node-pulse-b{animation:pulseB 3.2s ease-in-out 0.6s infinite}
-.node-pulse-c{animation:pulseC 2.5s ease-in-out 1.2s infinite}
-@keyframes pulseA{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.35)}}
-@keyframes pulseB{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.4)}}
-@keyframes pulseC{0%,100%{opacity:0.55;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
-.signal-ab{animation:travelAB 3s linear infinite}
-.signal-bc{animation:travelBC 4s linear 1s infinite}
-.signal-ca{animation:travelCA 3.5s linear 2s infinite}
-@keyframes travelAB{0%{transform:translate(145px,150px);opacity:1}100%{transform:translate(270px,155px);opacity:0}}
-@keyframes travelBC{0%{transform:translate(270px,155px);opacity:1}100%{transform:translate(175px,230px);opacity:0}}
-@keyframes travelCA{0%{transform:translate(175px,230px);opacity:1}100%{transform:translate(145px,150px);opacity:0}}
-
+.hero-inner { max-width: 860px; position: relative; z-index: 2; }
 .hero-tag {
   display: inline-flex; align-items: center; gap: 0.6rem;
   font-family: var(--mono); font-size: 0.72rem; color: var(--amber);
@@ -511,8 +436,6 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
 .reveal-delay-4 { transition-delay: 0.4s; }
 
 @media (max-width: 900px) {
-  #hero { grid-template-columns: 1fr; }
-  .hero-anim { display: none; }
   .about-grid { grid-template-columns: 1fr; gap: 3rem; }
   .projects-grid { grid-template-columns: 1fr; }
   .pub-item { grid-template-columns: 1fr; }
@@ -559,8 +482,6 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
 <!-- HERO -->
 <section id="hero">
   <div class="hero-bg-text">YASIN</div>
-
-  <!-- LEFT: Text -->
   <div class="hero-inner">
     <div class="hero-tag">
       Senior Software Engineer &nbsp;<span class="sep">·</span>&nbsp; ML Researcher &nbsp;<span class="sep">·</span>&nbsp; Tempe, AZ
@@ -578,261 +499,8 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
       <a href="#research" class="btn btn-amber">View Research →</a>
       <a href="#experience" class="btn btn-ghost">My Journey</a>
       <a href="mailto:yasinbuet1996@gmail.com" class="btn btn-ghost">Contact Me</a>
-      <a href="YASIN_CV.pdf" download="Md_Yasin_CV.pdf" class="btn btn-ghost">↓ Download CV</a>
     </div>
   </div>
-
-  <!-- RIGHT: Animated coding scene -->
-  <div class="hero-anim">
-    <!-- Floating code chips -->
-    <div class="code-float code-float-1">🌐 mdyasin044.github.io</div>
-    <div class="code-float code-float-2">↓ scroll to explore portfolio</div>
-    <div class="code-float code-float-3">✓ live · deployed on GitHub Pages</div>
-
-    <!-- Main SVG scene -->
-    <svg class="desk-scene" viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" fill="none">
-
-      <!-- Ambient desk glow -->
-      <ellipse cx="230" cy="410" rx="160" ry="18" fill="rgba(232,160,69,0.08)"/>
-
-      <!-- Desk surface -->
-      <rect x="30" y="310" width="400" height="14" rx="4" fill="#1a2a3e"/>
-      <rect x="50" y="322" width="360" height="6" rx="2" fill="#142030"/>
-
-      <!-- Monitor stand -->
-      <rect x="205" y="298" width="50" height="14" rx="3" fill="#1e3050"/>
-      <rect x="185" y="310" width="90" height="8" rx="3" fill="#253d5a"/>
-
-      <!-- Monitor body -->
-      <rect x="60" y="55" width="340" height="245" rx="10" fill="#0e1929"/>
-      <rect x="62" y="57" width="336" height="241" rx="9" fill="#0a1520"/>
-      <rect x="62" y="57" width="336" height="4" rx="2" fill="rgba(255,255,255,0.04)"/>
-      <rect x="60" y="55" width="340" height="245" rx="10" stroke="rgba(232,160,69,0.3)" stroke-width="1.5"/>
-
-      <!-- Screen area -->
-      <rect x="72" y="68" width="316" height="210" rx="5" fill="#060d18"/>
-
-      <!-- Browser chrome -->
-      <rect x="72" y="68" width="316" height="20" rx="5" fill="#0d1b2e"/>
-      <rect x="72" y="80" width="316" height="8" fill="#0d1b2e"/>
-      <!-- browser dots -->
-      <circle cx="87" cy="78" r="3.5" fill="#ff5f57"/>
-      <circle cx="100" cy="78" r="3.5" fill="#ffbd2e"/>
-      <circle cx="113" cy="78" r="3.5" fill="#28ca41"/>
-      <!-- address bar -->
-      <rect x="128" y="72" width="200" height="12" rx="4" fill="#0a1828"/>
-      <text x="134" y="82" font-family="monospace" font-size="6.5" fill="rgba(134,239,172,0.8)">🔒 mdyasin044.github.io</text>
-
-      <!-- clipping mask for scroll area -->
-      <defs>
-        <clipPath id="screenMask">
-          <rect x="72" y="88" width="316" height="190"/>
-        </clipPath>
-        <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#e8a045" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#e8a045" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-
-      <!-- ===== SCROLLING PORTFOLIO PREVIEW ===== -->
-      <!-- static clip wrapper - clip stays fixed, only inner group scrolls -->
-      <g clip-path="url(#screenMask)">
-      <g class="portfolio-scroll">
-
-        <!-- ============ HERO ============ -->
-        <rect x="72" y="88" width="316" height="110" fill="#09101f"/>
-        <!-- particle dots scatter -->
-        <circle cx="330" cy="97"  r="1.5" fill="rgba(232,160,69,0.5)"/>
-        <circle cx="355" cy="112" r="1"   fill="rgba(232,160,69,0.3)"/>
-        <circle cx="344" cy="128" r="1.5" fill="rgba(46,196,182,0.4)"/>
-        <circle cx="370" cy="120" r="1"   fill="rgba(192,132,252,0.35)"/>
-        <circle cx="362" cy="143" r="1.5" fill="rgba(232,160,69,0.3)"/>
-        <circle cx="320" cy="148" r="1"   fill="rgba(46,196,182,0.3)"/>
-        <circle cx="375" cy="100" r="1.2" fill="rgba(192,132,252,0.25)"/>
-        <circle cx="340" cy="155" r="0.8" fill="rgba(232,160,69,0.2)"/>
-        <!-- nav -->
-        <rect x="72" y="88" width="316" height="11" fill="#0d1929"/>
-        <text x="82" y="97"  font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.85)" font-weight="bold">Md. Yasin</text>
-        <text x="274" y="97" font-family="monospace" font-size="4.5" fill="rgba(140,155,175,0.6)">About · Skills · Work · Contact</text>
-        <!-- eyebrow label -->
-        <text x="82" y="113" font-family="monospace" font-size="5" fill="rgba(232,160,69,0.65)" letter-spacing="1.5">ML RESEARCHER · SWE</text>
-        <!-- name -->
-        <text x="82" y="129" font-family="Georgia,serif" font-size="16" fill="white" font-weight="bold">Md. Yasin</text>
-        <!-- subtitle -->
-        <text x="82" y="141" font-family="monospace" font-size="6" fill="rgba(180,190,210,0.8)">Samsung Research · BUET · Tempe, AZ</text>
-        <!-- desc -->
-        <text x="82" y="152" font-family="monospace" font-size="5.5" fill="rgba(140,155,175,0.6)">Building intelligent systems at the intersection</text>
-        <text x="82" y="161" font-family="monospace" font-size="5.5" fill="rgba(140,155,175,0.6)">of machine learning &amp; software engineering.</text>
-        <!-- CTA buttons -->
-        <rect x="82"  y="167" width="48" height="14" rx="3" fill="#e8a045"/>
-        <text x="106" y="178" font-family="monospace" font-size="6" fill="#09101f" font-weight="bold" text-anchor="middle">Let's Talk</text>
-        <rect x="136" y="167" width="44" height="14" rx="3" fill="transparent" stroke="rgba(232,160,69,0.55)" stroke-width="1"/>
-        <text x="158" y="178" font-family="monospace" font-size="6" fill="rgba(232,160,69,0.8)" text-anchor="middle">My Work</text>
-        <rect x="186" y="167" width="54" height="14" rx="3" fill="transparent" stroke="rgba(200,200,200,0.2)" stroke-width="1"/>
-        <text x="213" y="178" font-family="monospace" font-size="5.5" fill="rgba(200,200,200,0.45)" text-anchor="middle">↓ Download CV</text>
-
-        <!-- ============ STATS BAR ============ -->
-        <rect x="72" y="198" width="316" height="20" fill="#0d1929"/>
-        <line x1="72"  y1="198" x2="388" y2="198" stroke="rgba(232,160,69,0.18)" stroke-width="0.5"/>
-        <line x1="72"  y1="218" x2="388" y2="218" stroke="rgba(232,160,69,0.18)" stroke-width="0.5"/>
-        <text x="90"  y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(232,160,69,1)"    font-weight="bold">6+</text>
-        <text x="103" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> yrs exp</text>
-        <line x1="150" y1="201" x2="150" y2="215" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
-        <text x="158" y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(46,196,182,1)"    font-weight="bold">3</text>
-        <text x="165" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> research</text>
-        <line x1="215" y1="201" x2="215" y2="215" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
-        <text x="222" y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(232,160,69,1)"    font-weight="bold">80%</text>
-        <text x="244" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> faster</text>
-        <line x1="290" y1="201" x2="290" y2="215" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
-        <text x="298" y="212" font-family="Georgia,serif"  font-size="9"   fill="rgba(134,239,172,1)"   font-weight="bold">5</text>
-        <text x="307" y="212" font-family="monospace"      font-size="5"   fill="rgba(140,155,175,0.6)"> awards</text>
-
-        <!-- ============ SKILLS ============ -->
-        <rect x="72" y="218" width="316" height="96" fill="#09101f"/>
-        <!-- section title -->
-        <text x="230" y="234" font-family="Georgia,serif" font-size="10" fill="white" font-weight="bold" text-anchor="middle">Skills</text>
-        <line x1="196" y1="237" x2="264" y2="237" stroke="rgba(232,160,69,0.55)" stroke-width="1"/>
-        <!-- pills row 1 -->
-        <rect x="82"  y="242" width="32" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
-        <text x="98"  y="249.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">Python</text>
-        <rect x="118" y="242" width="36" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
-        <text x="136" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">PyTorch</text>
-        <rect x="158" y="242" width="30" height="9" rx="2.5" fill="rgba(192,132,252,0.12)" stroke="rgba(192,132,252,0.4)" stroke-width="0.6"/>
-        <text x="173" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(192,132,252,0.95)" text-anchor="middle">React</text>
-        <rect x="192" y="242" width="24" height="9" rx="2.5" fill="rgba(134,239,172,0.12)" stroke="rgba(134,239,172,0.4)" stroke-width="0.6"/>
-        <text x="204" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(134,239,172,0.95)" text-anchor="middle">C++</text>
-        <rect x="220" y="242" width="38" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
-        <text x="239" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">TypeScript</text>
-        <rect x="262" y="242" width="24" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
-        <text x="274" y="249.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">C#</text>
-        <!-- pills row 2 -->
-        <rect x="82"  y="254" width="26" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
-        <text x="95"  y="261.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">Node</text>
-        <rect x="112" y="254" width="44" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
-        <text x="134" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">TensorFlow</text>
-        <rect x="160" y="254" width="32" height="9" rx="2.5" fill="rgba(192,132,252,0.12)" stroke="rgba(192,132,252,0.4)" stroke-width="0.6"/>
-        <text x="176" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(192,132,252,0.95)" text-anchor="middle">Django</text>
-        <rect x="196" y="254" width="36" height="9" rx="2.5" fill="rgba(134,239,172,0.12)" stroke="rgba(134,239,172,0.4)" stroke-width="0.6"/>
-        <text x="214" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(134,239,172,0.95)" text-anchor="middle">MongoDB</text>
-        <rect x="236" y="254" width="30" height="9" rx="2.5" fill="rgba(46,196,182,0.12)" stroke="rgba(46,196,182,0.4)" stroke-width="0.6"/>
-        <text x="251" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)" text-anchor="middle">SwiftUI</text>
-        <rect x="270" y="254" width="24" height="9" rx="2.5" fill="rgba(232,160,69,0.12)" stroke="rgba(232,160,69,0.4)" stroke-width="0.6"/>
-        <text x="282" y="261.5" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)" text-anchor="middle">.NET</text>
-        <!-- skill bars -->
-        <text x="82"  y="279" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">ML / AI</text>
-        <rect x="110" y="272" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
-        <rect x="110" y="272" width="99"  height="6" rx="2" fill="rgba(232,160,69,0.7)"/>
-        <text x="82"  y="291" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">Frontend</text>
-        <rect x="110" y="284" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
-        <rect x="110" y="284" width="90"  height="6" rx="2" fill="rgba(46,196,182,0.7)"/>
-        <text x="82"  y="303" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">Backend</text>
-        <rect x="110" y="296" width="110" height="6" rx="2" fill="rgba(255,255,255,0.05)"/>
-        <rect x="110" y="296" width="82"  height="6" rx="2" fill="rgba(192,132,252,0.7)"/>
-
-        <!-- ============ EXPERIENCE ============ -->
-        <rect x="72" y="314" width="316" height="96" fill="#09101f"/>
-        <text x="230" y="330" font-family="Georgia,serif" font-size="10" fill="white" font-weight="bold" text-anchor="middle">Experience</text>
-        <line x1="186" y1="333" x2="274" y2="333" stroke="rgba(232,160,69,0.55)" stroke-width="1"/>
-        <!-- Samsung card -->
-        <rect x="82" y="338" width="274" height="34" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(232,160,69,0.22)" stroke-width="0.8"/>
-        <rect x="82" y="338" width="3.5" height="34" rx="1" fill="rgba(232,160,69,0.8)"/>
-        <text x="92" y="350" font-family="monospace" font-size="6" fill="rgba(232,160,69,0.95)" font-weight="bold">Samsung Research Bangladesh</text>
-        <text x="92" y="360" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">Senior SWE · Medical Solution Group · 2019–2025</text>
-        <text x="92" y="369" font-family="monospace" font-size="5" fill="rgba(134,239,172,0.75)">↓ 80% report load · ML auto-suggest · Knox DB</text>
-        <!-- BUET card -->
-        <rect x="82" y="376" width="274" height="30" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(46,196,182,0.22)" stroke-width="0.8"/>
-        <rect x="82" y="376" width="3.5" height="30" rx="1" fill="rgba(46,196,182,0.8)"/>
-        <text x="92" y="388" font-family="monospace" font-size="6" fill="rgba(46,196,182,0.95)" font-weight="bold">Bangladesh University of Eng. &amp; Technology</text>
-        <text x="92" y="398" font-family="monospace" font-size="5" fill="rgba(140,155,175,0.7)">B.Sc. CSE · 2015–2019 · CGPA 3.37/4.0</text>
-
-        <!-- ============ RESEARCH ============ -->
-        <rect x="72" y="410" width="316" height="112" fill="#09101f"/>
-        <text x="230" y="426" font-family="Georgia,serif" font-size="10" fill="white" font-weight="bold" text-anchor="middle">Research</text>
-        <line x1="196" y1="429" x2="264" y2="429" stroke="rgba(192,132,252,0.55)" stroke-width="1"/>
-        <!-- paper 1 -->
-        <rect x="82" y="433" width="274" height="28" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(192,132,252,0.22)" stroke-width="0.8"/>
-        <rect x="82" y="433" width="3.5" height="28" rx="1" fill="rgba(192,132,252,0.8)"/>
-        <text x="92" y="445" font-family="monospace" font-size="5.5" fill="rgba(192,132,252,0.95)">SR3 Diffusion Model · Ultrasound Super-Resolution</text>
-        <text x="92" y="455" font-family="monospace" font-size="5"   fill="rgba(134,239,172,0.75)">PSNR ≈ 32 dB · SSIM ≈ 0.93</text>
-        <!-- paper 2 -->
-        <rect x="82" y="465" width="274" height="28" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(46,196,182,0.22)" stroke-width="0.8"/>
-        <rect x="82" y="465" width="3.5" height="28" rx="1" fill="rgba(46,196,182,0.8)"/>
-        <text x="92" y="477" font-family="monospace" font-size="5.5" fill="rgba(46,196,182,0.95)">Time Series Air Quality Prediction · SARIMAX</text>
-        <text x="92" y="487" font-family="monospace" font-size="5"   fill="rgba(134,239,172,0.75)">MAE: 5.48 · RMSE: 7.98 · Advisor: Dr. Anindya Iqbal</text>
-        <!-- paper 3 -->
-        <rect x="82" y="497" width="274" height="22" rx="4" fill="rgba(13,27,46,0.9)" stroke="rgba(232,160,69,0.22)" stroke-width="0.8"/>
-        <rect x="82" y="497" width="3.5" height="22" rx="1" fill="rgba(232,160,69,0.8)"/>
-        <text x="92" y="511" font-family="monospace" font-size="5.5" fill="rgba(232,160,69,0.95)">Email Clustering · Doc2Vec · Enron Dataset</text>
-
-        <!-- ============ CONTACT / FOOTER ============ -->
-        <rect x="72" y="522" width="316" height="56" fill="#0d1929"/>
-        <line x1="72" y1="522" x2="388" y2="522" stroke="rgba(232,160,69,0.2)" stroke-width="0.5"/>
-        <text x="230" y="541" font-family="Georgia,serif" font-size="11" fill="white" font-weight="bold" text-anchor="middle">Let's Build Something</text>
-        <text x="230" y="552" font-family="monospace" font-size="5.5" fill="rgba(140,155,175,0.55)" text-anchor="middle">Open to ML research roles &amp; SWE opportunities</text>
-        <rect x="182" y="556" width="96" height="14" rx="3" fill="#e8a045"/>
-        <text x="230" y="567" font-family="monospace" font-size="6" fill="#09101f" font-weight="bold" text-anchor="middle">Say Hello →</text>
-
-      </g><!-- end scroll group -->
-      </g><!-- end clip wrapper -->
-
-      <!-- screen glow overlay -->
-      <rect x="72" y="88" width="316" height="190" fill="url(#screenGlow)" opacity="0.06"/>
-
-
-
-      <!-- Keyboard -->
-      <rect x="110" y="328" width="240" height="55" rx="6" fill="#1a2a3e"/>
-      <rect x="112" y="330" width="236" height="51" rx="5" fill="#162030"/>
-      <g fill="#1e3050">
-        <rect x="118" y="334" width="16" height="10" rx="2"/><rect x="137" y="334" width="16" height="10" rx="2"/>
-        <rect x="156" y="334" width="16" height="10" rx="2"/><rect x="175" y="334" width="16" height="10" rx="2"/>
-        <rect x="194" y="334" width="16" height="10" rx="2"/><rect x="213" y="334" width="16" height="10" rx="2"/>
-        <rect x="232" y="334" width="16" height="10" rx="2"/><rect x="251" y="334" width="16" height="10" rx="2"/>
-        <rect x="270" y="334" width="16" height="10" rx="2"/><rect x="289" y="334" width="16" height="10" rx="2"/>
-        <rect x="308" y="334" width="16" height="10" rx="2"/>
-        <rect x="118" y="347" width="22" height="10" rx="2"/><rect x="143" y="347" width="16" height="10" rx="2"/>
-        <rect x="162" y="347" width="16" height="10" rx="2"/><rect x="181" y="347" width="16" height="10" rx="2"/>
-        <rect x="200" y="347" width="16" height="10" rx="2"/><rect x="219" y="347" width="16" height="10" rx="2"/>
-        <rect x="238" y="347" width="16" height="10" rx="2"/><rect x="257" y="347" width="16" height="10" rx="2"/>
-        <rect x="276" y="347" width="16" height="10" rx="2"/><rect x="295" y="347" width="22" height="10" rx="2"/>
-        <rect x="118" y="360" width="28" height="10" rx="2"/>
-        <rect x="149" y="360" width="16" height="10" rx="2"/><rect x="168" y="360" width="16" height="10" rx="2"/>
-        <rect x="187" y="360" width="16" height="10" rx="2"/><rect x="206" y="360" width="16" height="10" rx="2"/>
-        <rect x="225" y="360" width="16" height="10" rx="2"/><rect x="244" y="360" width="16" height="10" rx="2"/>
-        <rect x="263" y="360" width="28" height="10" rx="2"/>
-        <rect x="160" y="373" width="110" height="8" rx="2"/>
-      </g>
-      <g class="hands">
-        <rect x="194" y="347" width="16" height="10" rx="2" fill="rgba(232,160,69,0.25)"/>
-        <rect x="262" y="347" width="16" height="10" rx="2" fill="rgba(232,160,69,0.18)"/>
-      </g>
-
-      <!-- Coffee mug -->
-      <g transform="translate(358, 290)">
-        <rect x="0" y="14" width="34" height="30" rx="4" fill="#1e3050"/>
-        <rect x="2" y="16" width="30" height="26" rx="3" fill="#253d5a"/>
-        <path d="M34 20 Q46 20 46 29 Q46 38 34 38" stroke="#1e3050" stroke-width="5" stroke-linecap="round" fill="none"/>
-        <ellipse cx="17" cy="16" rx="15" ry="4" fill="#3d2b1a"/>
-        <ellipse cx="17" cy="15" rx="13" ry="3" fill="#5c3d1e"/>
-        <text x="6" y="34" font-family="monospace" font-size="7" fill="rgba(232,160,69,0.6)">☕</text>
-        <path d="M10 14 Q12 8 10 2" stroke="rgba(232,160,69,0.4)" stroke-width="1.5" stroke-linecap="round" class="steam-1"/>
-        <path d="M17 12 Q19 6 17 0" stroke="rgba(232,160,69,0.3)" stroke-width="1.5" stroke-linecap="round" class="steam-2"/>
-        <path d="M24 14 Q26 8 24 2" stroke="rgba(232,160,69,0.35)" stroke-width="1.5" stroke-linecap="round" class="steam-3"/>
-      </g>
-
-      <!-- Small plant -->
-      <g transform="translate(62, 288)">
-        <rect x="4" y="18" width="20" height="16" rx="3" fill="#1e3050"/>
-        <rect x="6" y="20" width="16" height="12" rx="2" fill="#253d5a"/>
-        <ellipse cx="14" cy="10" rx="10" ry="12" fill="#1a4a2a"/>
-        <ellipse cx="8" cy="14" rx="7" ry="9" fill="#1e5c30"/>
-        <ellipse cx="20" cy="13" rx="7" ry="9" fill="#1e5c30"/>
-        <ellipse cx="14" cy="6" rx="6" ry="8" fill="#2a7a40"/>
-      </g>
-
-    </svg>
-  </div>
-
   <div class="hero-scroll">
     <span class="scroll-text">Scroll</span>
     <div class="scroll-line"></div>
@@ -845,7 +513,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
   <div class="stat-block reveal reveal-delay-1"><span class="stat-val" data-target="3">0</span><span class="stat-label">Research Projects</span></div>
   <div class="stat-block reveal reveal-delay-2"><span class="stat-val" data-target="80">0</span><span class="stat-label">% Load Time Reduced</span></div>
   <div class="stat-block reveal reveal-delay-3"><span class="stat-val" data-target="5">0</span><span class="stat-label">Awards & Certs</span></div>
-  <div class="stat-block reveal reveal-delay-4"><span class="stat-val" data-target="100">0</span><span class="stat-label">+ UI Components Built</span></div>
+  <div class="stat-block reveal reveal-delay-4"><span class="stat-val" data-target="25">0</span><span class="stat-label">% App Performance Optimized</span></div>
 </div>
 
 <!-- ABOUT -->
@@ -856,7 +524,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
   <div class="about-grid">
     <div class="about-text reveal">
       <p>
-        I'm a software engineer and ML researcher based in <strong>Tempe, Arizona</strong>, with a B.Sc. in Computer Science and Engineering from <em>Bangladesh University of Engineering and Technology (BUET)</em>. I graduated with a CGPA of 3.37/4.0 in 2019.
+        I'm a software engineer and ML researcher based in <strong>Tempe, Arizona</strong>, with a B.Sc. in Computer Science and Engineering from <em>Bangladesh University of Engineering and Technology (BUET)</em>. I graduated in 2019.
       </p>
       <p>
         After BUET, I joined <strong>Samsung Research Bangladesh</strong>, where I spent six years building production systems for Samsung's medical ultrasound machines, Knox enterprise platform, and health applications. I wore many hats — <em>backend engineer, UI architect, ML prototype designer, DSA mentor</em> — and shipped across C#, .NET, React, NodeJS, and Swift.
@@ -882,7 +550,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
           <div class="tl-body">
             <div class="tl-role">B.Sc. in Computer Science & Engineering</div>
             <div class="tl-place">Bangladesh University of Engineering and Technology</div>
-            <div class="tl-desc">CGPA 3.37/4.0. Thesis on spatio-temporal air quality prediction. Courses in ML, AI, Compilers, OS, Networks.</div>
+            <div class="tl-desc">Thesis on spatio-temporal air quality prediction. Courses in ML, AI, Compilers, OS, Networks.</div>
           </div>
         </div>
         <div class="tl-item">
@@ -899,7 +567,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
 
     <div class="about-facts reveal reveal-delay-2">
       <div class="fact-row"><span class="fact-label">Location</span><span class="fact-val">Tempe, AZ 85281</span></div>
-      <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val"><a href="mailto:yasinbuet1996@gmail.com" data-orig="f78e96849e9995829283c6cecec1b7909a969e9bd994989a"><span class="__cf_email__" data-cfemail="c7bea6b4aea9a5b2a2b3f6fefef187a0aaa6aeabe9a4a8aa">[email&#160;protected]</span></a></span></div>
+      <div class="fact-row"><span class="fact-label">Email</span><span class="fact-val"><a href="mailto:yasinbuet1996@gmail.com">yasinbuet1996@gmail.com</a></span></div>
       <div class="fact-row"><span class="fact-label">LinkedIn</span><span class="fact-val"><a href="https://linkedin.com/in/mohammad-yasin" target="_blank">mohammad-yasin ↗</a></span></div>
       <div class="fact-row"><span class="fact-label">GitHub</span><span class="fact-val"><a href="https://github.com/mdyasin044" target="_blank">mdyasin044 ↗</a></span></div>
       <div class="fact-row"><span class="fact-label">Education</span><span class="fact-val">B.Sc. CSE, BUET (2019)</span></div>
@@ -1029,7 +697,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
       </div>
       <div class="proj-footer">
         <span class="proj-status status-oss">Open Source</span>
-        <div class="proj-links"><a href="https://github.com/mdyasin044" class="proj-link">GitHub ↗</a></div>
+        <div class="proj-links"><a href="https://github.com/mdyasin044/Kothahok" class="proj-link">GitHub ↗</a></div>
       </div>
     </div>
     <div class="proj-card reveal reveal-delay-3">
@@ -1044,7 +712,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
       </div>
       <div class="proj-footer">
         <span class="proj-status status-oss">🥉 2nd Runner-Up</span>
-        <div class="proj-links"><a href="https://github.com/mdyasin044" class="proj-link">GitHub ↗</a></div>
+        <div class="proj-links"><a href="https://github.com/mdyasin044/iDoc" class="proj-link">GitHub ↗</a></div>
       </div>
     </div>
   </div>
@@ -1087,7 +755,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
         <div class="pub-authors"><strong>Md. Yasin</strong> · BUET CSE Department</div>
         <p class="pub-abs">Implemented unsupervised clustering of emails using Doc2Vec embeddings combined with K-Means to group semantically similar messages. Used Gensim, scikit-learn, and pandas for vectorization and analysis on a subset of the Enron email dataset.</p>
       </div>
-      <div class="pub-actions"><a href="https://github.com/mdyasin044" class="pub-btn">GitHub</a></div>
+      <div class="pub-actions"><a href="https://github.com/mdyasin044/Email-Clustering-using-Doc2Vec" class="pub-btn">GitHub</a></div>
     </div>
   </div>
 </section>
@@ -1218,17 +886,17 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
     <p class="contact-para">
       Open to new engineering roles, research collaborations, and exciting opportunities in software or applied ML. Whether you're hiring, researching, or just want to talk tech — I'd love to hear from you.
     </p>
-    <a href="mailto:yasinbuet1996@gmail.com" data-orig="bec7dfcdd7d0dccbdbca8f878788fed9d3dfd7d290ddd1d3" class="btn btn-amber">Send an Email →</a>
+    <a href="mailto:yasinbuet1996@gmail.com" class="btn btn-amber">Send an Email →</a>
   </div>
   <div class="contact-right reveal reveal-delay-2">
     <div class="contact-row">
       <span class="c-label">Email</span>
-      <span class="c-val"><a href="mailto:yasinbuet1996@gmail.com" data-orig="d2abb3a1bbbcb0a7b7a6e3ebebe492b5bfb3bbbefcb1bdbf"><span class="__cf_email__" data-cfemail="60190113090e021505145159595620070d01090c4e030f0d">[email&#160;protected]</span></a></span>
+      <span class="c-val"><a href="mailto:yasinbuet1996@gmail.com">yasinbuet1996@gmail.com</a></span>
       <span class="c-arrow">↗</span>
     </div>
     <div class="contact-row">
       <span class="c-label">Location</span>
-      <span class="c-val">1123 E Apache Blvd, Tempe, AZ 85281</span>
+      <span class="c-val">Tempe, AZ 85281</span>
       <span class="c-arrow"></span>
     </div>
     <div class="contact-row">
@@ -1255,7 +923,7 @@ footer span { font-family: var(--mono); font-size: 0.65rem; color: var(--muted);
   <span>Tempe, AZ</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* CURSOR */
 const dot = document.getElementById('cur-dot');
 const ring = document.getElementById('cur-ring');
@@ -1317,4 +985,16 @@ function animCount(el,target){
   const t=setInterval(()=>{c+=step;if(c>=target){c=target;clearInterval(t);}el.textContent=Math.floor(c);},28);
 }
 const co=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIn
+  entries.forEach(e=>{if(e.isIntersecting){const el=e.target.querySelector('[data-target]');if(el)animCount(el,parseInt(el.dataset.target));co.unobserve(e.target);}});
+},{threshold:0.5});
+document.querySelectorAll('.stat-block').forEach(b=>co.observe(b));
+
+/* MOBILE BURGER */
+document.getElementById('burger').addEventListener('click',()=>{
+  const l=document.querySelector('.nav-links');
+  const open=l.style.display==='flex';
+  Object.assign(l.style,{display:open?'none':'flex',flexDirection:'column',position:'absolute',top:'100%',left:'0',right:'0',background:'rgba(9,16,31,0.97)',padding:'1rem 5vw',borderBottom:'1px solid #1e2f47'});
+});
+</script>
+</body>
+</html>
